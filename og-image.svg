@@ -1,0 +1,13 @@
+<!-- PLACEHOLDER: substituir por imagem OG definitiva (1200x630) antes da publicação -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="BS Agro Capital">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#0d3527"/>
+      <stop offset="100%" stop-color="#237a58"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="60" y="60" width="1080" height="510" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.5"/>
+  <text x="600" y="330" text-anchor="middle" font-family="Georgia, serif" font-size="72" fill="#fbf9f4" font-weight="600">BS Agro Capital</text>
+  <text x="600" y="390" text-anchor="middle" font-family="Arial, sans-serif" font-size="26" fill="#e3c667" letter-spacing="2">CAPITAL PARA FORTALECER QUEM PRODUZ</text>
+</svg>

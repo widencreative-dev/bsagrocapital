@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "bs-agro-dev",
+      "runtimeExecutable": "node",
+      "runtimeArgs": ["dev-server.cjs"],
+      "port": 4321
+    }
+  ]
+}
