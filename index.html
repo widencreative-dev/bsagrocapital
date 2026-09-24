@@ -941,34 +941,37 @@
           });
         }
 
-        /* ---- Header: esconde ao descer, aparece ao subir -----------------
-           Compara a posição do scroll a cada evento: descendo (diferença
-           positiva) esconde, subindo (diferença negativa) mostra. Uma
-           margem de ±4px evita que o header pisque com as variações
-           mínimas que o Lenis gera a cada frame durante o scroll suave —
-           sem essa margem, pequenos ajustes de subpixel já contariam como
-           "mudou de direção". Fica sempre visível perto do topo (< 80px) e
-           com o menu mobile aberto, pra não sumir enquanto quem usa
-           consulta os links. */
+        /* ---- Header: visível só no hero ----------------------------------
+           Não reage mais à direção da rolagem (antes: escondia ao descer e
+           voltava ao subir). A regra agora é de posição: enquanto qualquer
+           parte do hero estiver na tela o header aparece; passou do hero,
+           some — e continua sumido por toda a página, inclusive subindo.
+           Só volta quando o hero reaparece no topo da tela.
+
+           Duas exceções, ambas para não deixar ninguém preso: com o menu
+           mobile aberto o header não some (senão o menu sumiria junto), e
+           se algo dentro dele receber foco de teclado ele reaparece — um
+           elemento focável e invisível manda o teclado pra um lugar que não
+           dá pra ver. */
         if (header) {
-          var ultimoScrollY = window.scrollY;
-          window.addEventListener(
-            "scroll",
-            function () {
-              var atualY = window.scrollY;
-              var diferenca = atualY - ultimoScrollY;
-              var menuAberto = menu && !menu.classList.contains("hidden");
-              if (menuAberto || atualY < 80) {
-                header.classList.remove("header--escondido");
-              } else if (diferenca > 4) {
-                header.classList.add("header--escondido");
-              } else if (diferenca < -4) {
-                header.classList.remove("header--escondido");
-              }
-              ultimoScrollY = atualY;
-            },
-            { passive: true }
-          );
+          var hero = document.querySelector("[data-hero]");
+
+          function atualizarHeader() {
+            var menuAberto = menu && !menu.classList.contains("hidden");
+            var temFoco = header.contains(document.activeElement);
+            /* bottom > 0: a borda de baixo do hero ainda está abaixo do
+               topo da tela, ou seja, sobra hero visível. Medido a cada
+               evento em vez de guardar a altura, porque ela muda com o
+               redimensionamento e com a barra de endereço do celular. */
+            var noHero = !hero || hero.getBoundingClientRect().bottom > 0;
+            header.classList.toggle("header--escondido", !(menuAberto || temFoco || noHero));
+          }
+
+          window.addEventListener("scroll", atualizarHeader, { passive: true });
+          window.addEventListener("resize", atualizarHeader);
+          header.addEventListener("focusin", atualizarHeader);
+          header.addEventListener("focusout", atualizarHeader);
+          atualizarHeader();
         }
 
         /* ---- Menu: destaca a seção que está sendo lida ------------------- */
