@@ -3,3 +3,6 @@
 
 # jetbrains setting folder
 .idea/
+
+# página de teste de rolagem: só local, nunca vai pro repositório
+teste-scroll.html
