@@ -1475,6 +1475,32 @@ h6 {
   color: var(--color-graphite-600);
 }
 
+/* Indicadores da seção "Quem somos" (+10 anos, +800 clientes, +R$ 200M).
+   nowrap porque "+800 CLIENTES" é o mais longo dos três e quebrava em duas
+   linhas ("+800" / "CLIENTES") na maioria das larguras de desktop: a coluna
+   tem 384px em 1280px de tela e o texto, 385px. Um pixel. Com a quebra, a
+   legenda dessa coluna descia e ficava fora de linha com as outras duas.
+   Como nowrap sozinho faria o texto transbordar a coluna e invadir a
+   vizinha, o tamanho é fluido: cresce com a tela e para nos 52px de antes,
+   que é onde ele cabe inteiro. O mesmo tamanho vale para os três, senão um
+   indicador ficaria menor que os outros sem motivo aparente. */
+.stat-numero {
+  white-space: nowrap;
+  line-height: 1.1;
+  /* Empilhados, um por linha: o número tem a largura toda e o limite é só
+     não passar da borda da tela. */
+  font-size: clamp(2rem, 10vw, 2.75rem);
+}
+
+@media (min-width: 768px) {
+  /* Três por linha: agora cada número disputa um terço da largura, e o teto
+     é o tamanho original de 52px — alcançado a partir de ~1530px, onde a
+     coluna finalmente comporta os 385px de "+800 CLIENTES". */
+  .stat-numero {
+    font-size: clamp(1.625rem, 3.4vw, 52px);
+  }
+}
+
 /* --------------------------------------------------------------------------
    10. Animação de entrada ao rolar
    O elemento só fica invisível se o JS estiver ativo (a classe `js` é posta no

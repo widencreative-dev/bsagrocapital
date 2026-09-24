@@ -454,17 +454,32 @@
                informado à parte durante o ajuste desta seção. -->
           <div class="mt-10 border-t border-graphite-900/15 pt-10 lg:mt-12 lg:pt-12">
             <p class="revelar text-sm font-medium uppercase tracking-[0.14em] text-olive-700">A trajetória por trás da BS Agro Capital</p>
-            <div class="mt-5 grid gap-8 sm:grid-cols-3">
-              <div class="revelar">
-                <p class="font-display uppercase text-5xl font-semibold text-gold-800 lg:text-[52px]" data-contador>+10 anos</p>
+            <!-- As três colunas só a partir de 768px, não de 640: em 640 cada
+                 coluna ficava com 176px e os números (que não quebram mais,
+                 ver .stat-numero) não cabiam.
+                 Colunas do tamanho do conteúdo (auto) com o espaço livre
+                 repartido igualmente (justify-between), em vez de três faixas
+                 de largura idêntica: com faixas iguais e textos de larguras
+                 bem diferentes, o vão que se VÊ entre um indicador e outro
+                 não é o vão entre as faixas — sobra muito espaço vazio depois
+                 do texto curto e quase nenhum depois do longo. Era o que
+                 fazia o bloco do meio parecer colado no da direita (179px de
+                 um lado contra 63px do outro, em 1280px). -->
+            <div class="mt-5 grid gap-8 md:grid-cols-[auto_auto_auto] md:justify-between">
+              <div class="revelar md:text-center">
+                <p class="stat-numero font-display uppercase font-semibold text-gold-800" data-contador>+10 anos</p>
                 <p class="mt-4 text-graphite-600">De experiência no mercado financeiro</p>
               </div>
-              <div class="revelar">
-                <p class="font-display uppercase text-5xl font-semibold text-gold-800 lg:text-[52px]" data-contador>+800 clientes</p>
+              <!-- Os três centralizados, não só este: número e legenda têm
+                   larguras bem diferentes e, alinhados à esquerda, a legenda
+                   ficava pendurada num canto do espaço do número. Centralizar
+                   um só deixava o espaçamento entre os três desigual. -->
+              <div class="revelar md:text-center">
+                <p class="stat-numero font-display uppercase font-semibold text-gold-800" data-contador>+800 clientes</p>
                 <p class="mt-4 text-graphite-600">Atendidos ao longo da carreira</p>
               </div>
-              <div class="revelar">
-                <p class="font-display uppercase text-5xl font-semibold text-gold-800 lg:text-[52px]" data-contador>+de R$ 200m</p>
+              <div class="revelar md:text-center">
+                <p class="stat-numero font-display uppercase font-semibold text-gold-800" data-contador>+de R$ 200m</p>
                 <p class="mt-4 text-graphite-600">Em operações de crédito ao longo da carreira</p>
               </div>
             </div>
