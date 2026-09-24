@@ -176,7 +176,13 @@
           <p class="hero-chip__label">Cooperativas de crédito e fundos de investimento</p>
         </div>
 
-        <div class="relative flex flex-1 flex-col justify-end gap-8 px-6 pb-12 pt-32 lg:px-14 lg:pb-16 lg:pt-40">
+        <!-- pb-28 no mobile (era pb-12): o .whatsapp-fab é fixo no canto
+             inferior direito e caía exatamente em cima da última palavra do
+             CTA "Solicitar uma análise pelo WhatsApp" com a página no topo —
+             ou seja, na primeira coisa que todo visitante vê. A folga maior
+             embaixo tira o botão de baixo do flutuante. A partir de lg o
+             lg:pb-16 volta a valer, onde nunca houve sobreposição. -->
+        <div class="relative flex flex-1 flex-col justify-end gap-8 px-6 pb-28 pt-32 lg:px-14 lg:pb-16 lg:pt-40">
           <div class="mx-auto flex w-full max-w-7xl flex-col gap-8">
             <div class="flex max-w-2xl flex-col gap-6">
               <h1 class="hero-headline revelar">
@@ -354,8 +360,17 @@
             <p class="lead mt-4 text-lg leading-relaxed text-graphite-600">Do diagnóstico inicial até a efetivação, cada etapa é construída a partir da realidade financeira e patrimonial apresentada pelo cliente.</p>
           </div>
           <div class="relative mt-10 lg:mt-12">
-            <div class="pointer-events-none absolute -left-12 -top-16 h-72 w-72 rounded-full bg-gold-400/30 blur-3xl" aria-hidden="true"></div>
-            <div class="pointer-events-none absolute -right-12 bottom-0 h-72 w-72 rounded-full bg-olive-400/30 blur-3xl" aria-hidden="true"></div>
+            <!-- left-0/right-0 em vez de -left-12/-right-12: assim posicionados,
+                 estes dois brilhos eram a única coisa que estourava a largura
+                 da página — 24px de cada lado no celular e 16px até ~1376px,
+                 que é a largura a partir da qual o contêiner (max-w-7xl) tem
+                 folga lateral suficiente pro recuo negativo caber. Quem
+                 segurava isso era o overflow-x:hidden de html/body, que
+                 esconde o sintoma em vez de resolver. São círculos de 288px
+                 com blur-3xl a 30% de opacidade: deslocar 48px pra dentro não
+                 muda nada visível, e a página deixa de depender da trava. -->
+            <div class="pointer-events-none absolute left-0 -top-16 h-72 w-72 rounded-full bg-gold-400/30 blur-3xl" aria-hidden="true"></div>
+            <div class="pointer-events-none absolute right-0 bottom-0 h-72 w-72 rounded-full bg-olive-400/30 blur-3xl" aria-hidden="true"></div>
             <ol class="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
               <li class="revelar relative flex flex-col items-center text-left lg:after:absolute lg:after:left-1/2 lg:after:top-5 lg:after:h-px lg:after:w-[calc(100%+2rem)] lg:after:bg-graphite-900/20 lg:after:content-['']">
                 <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-olive-800 text-sm font-semibold text-paper">01</span>
@@ -768,7 +783,7 @@
           <div class="flex w-full flex-col items-start gap-6 lg:max-w-xs">
             <img src="assets/img/logo/bs-agro-logo-white.png" alt="BS Agro Capital" width="2775" height="400" class="h-9 w-auto" />
             <p class="leading-relaxed text-paper/60">Estruturação de crédito para o agronegócio, com solidez técnica e visão de longo prazo.</p>
-            <ul class="flex items-center gap-5">
+            <ul class="footer-social flex items-center">
               <li><a href="https://www.facebook.com/bsagrooficial" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="Facebook da BS Agro Capital"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" /></svg></a></li>
               <li><a href="https://www.instagram.com/bsagro.capital/" target="_blank" rel="noopener noreferrer" class="footer-link" aria-label="Instagram da BS Agro Capital"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /> <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /> <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg></a></li>
               <li><a href="[INSERIR LINK DO LINKEDIN]" class="footer-link" aria-label="LinkedIn da BS Agro Capital"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" /> <rect width="4" height="12" x="2" y="9" /> <circle cx="4" cy="4" r="2" /></svg></a></li>
@@ -810,6 +825,16 @@
 
     <style>
       .footer-link { color: color-mix(in srgb, var(--color-paper) 80%, transparent); transition: color 200ms ease; }
+      /* Área de toque dos ícones sociais. O ícone continua com 20px, mas o
+         link passa a ocupar 44x44 — 20x20 fica abaixo até do mínimo de 24x24
+         do WCAG 2.5.8 e, no celular, errar o toque é a regra, não a exceção.
+         O recuo negativo na lista devolve o alinhamento do primeiro ícone
+         com o texto acima, que o padding teria empurrado pra dentro. */
+      .footer-social { gap: 0.25rem; margin-inline-start: -0.75rem; }
+      .footer-social .footer-link {
+        display: flex; align-items: center; justify-content: center;
+        width: 44px; height: 44px;
+      }
       .footer-link:hover { color: var(--color-paper); }
     </style>
 

@@ -798,22 +798,44 @@ h6 {
    especificidade, então quem vem por último no CSS ganha, sem precisar de
    !important. tabindex="0" no HTML garante que dá pra alcançar o destaque
    sem mouse, pelo teclado (:focus-visible). */
+/* Uma coluna no celular. Em duas colunas o cartão ficava com ~148px de
+   largura e as descrições (a do CPR tem 230 caracteres) passavam de 460px de
+   altura dentro de um cartão de 320px: como o texto é ancorado embaixo e o
+   cartão tem overflow:hidden, o excesso era cortado POR CIMA e o título
+   sumia — o cartão do CPR aparecia sem dizer a que linha se referia. Duas
+   colunas voltam a partir de 640px e as quatro ficam para 1024px, largura em
+   que a descrição mais longa cabe de novo. */
 .solucoes-cards {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 640px) {
+  .solucoes-cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
   .solucoes-cards {
     grid-template-columns: repeat(4, 1fr);
   }
 }
 
+/* min-height no lugar de height: com altura fixa, texto maior que o cartão
+   era cortado em silêncio (foi o que aconteceu com os títulos no celular).
+   Assim o cartão cresce quando precisa, em vez de esconder conteúdo. As
+   larguras acima já fazem o texto caber, então na prática ele fica nos 20rem
+   de sempre — isto é a rede de proteção para quando o texto mudar. O
+   justify-content mantém o conteúdo ancorado embaixo, como era com o
+   position:absolute. */
 .solucoes-card {
   position: relative;
-  display: block;
-  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 20rem;
   overflow: hidden;
   border-radius: 20px;
   background-color: var(--color-graphite-900);
@@ -857,10 +879,11 @@ h6 {
   background: linear-gradient(to top, rgb(8 10 13 / 0.85) 0%, rgb(8 10 13 / 0.35) 48%, transparent 78%);
 }
 
+/* Fora do position:absolute: agora o texto conta na altura do cartão, que é
+   o que permite o cartão crescer em vez de cortá-lo. Continua sobre o
+   gradiente porque vem depois dele no HTML. */
 .solucoes-card__content {
-  position: absolute;
-  inset-inline: 0;
-  bottom: 0;
+  position: relative;
   padding: 1.25rem;
   color: var(--color-paper);
 }
