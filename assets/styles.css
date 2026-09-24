@@ -88,6 +88,17 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Trava de segurança: nada nesta página deveria alargar o viewport (é
+   sempre um elemento específico ultrapassando a largura da tela, nunca
+   intencional), mas sem isso um único elemento estourando a largura força
+   rolagem horizontal na página inteira — em vez de cortar só aquele
+   elemento, "empurra" tudo e some com conteúdo pra quem não pensa em
+   rolar pro lado, especialmente no celular. */
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   margin: 0;
   background-color: var(--color-paper);
@@ -533,12 +544,23 @@ h6 {
   border-color: #25d366;
 }
 
-/* Telas bem estreitas: reduz um pouco a fonte pra rótulos longos ("Solicitar
-   análise de crédito") não brigarem por espaço. O botão continua em uma
-   linha só (não quebra). */
+/* Telas bem estreitas: reduz um pouco a fonte pra rótulos curtos não
+   brigarem por espaço à toa. Rótulos realmente longos ("Quero um plano
+   para Recuperação Judicial", 42 caracteres) não cabem numa linha só nem
+   reduzindo a fonte — sem max-width nem quebra, o botão simplesmente
+   ficava mais largo que a tela e estourava a página (era o que causava o
+   corte de conteúdo no celular). max-width trava o botão na largura do
+   próprio contêiner, e white-space: normal deixa o rótulo virar duas
+   linhas quando precisa. O botão não tem altura fixa (só padding), então
+   crescer pra duas linhas não quebra nada — inclusive a camada do hover
+   (.cta-btn__hover), que é width/height: 100% do botão e acompanha esse
+   crescimento. */
 @media (max-width: 420px) {
   .cta-btn {
+    max-width: 100%;
     font-size: 0.9375rem;
+    white-space: normal;
+    line-height: 1.3;
   }
 }
 
