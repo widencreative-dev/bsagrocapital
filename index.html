@@ -137,7 +137,19 @@
            FINAL", perto do rodapé) — os links para #solicitar-analise
            continuam funcionando, só que agora rolam pra lá. -->
       <section id="topo" data-hero class="relative flex min-h-[100dvh] flex-col overflow-hidden rounded-b-[32px] bg-olive-900 text-paper lg:rounded-b-[48px]">
-        <img src="assets/img/hero/produtor-rural-credito-agronegocio.jpg" alt="" aria-hidden="true" width="1920" height="1080" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover" style="object-position: 50% 12%" />
+        <!-- A foto do hero tem duas versões porque o enquadramento não
+             sobrevive à troca de formato: a original é 16:9 e o hero é
+             min-h-[100dvh], então num celular em pé o object-cover corta as
+             laterais e sobra pouco mais que o meio da cena. A versão mobile
+             é 9:16, já enquadrada em retrato.
+             O media query casa com o formato da tela, não com a largura
+             sozinha: um notebook estreito (<1024px) continua sendo paisagem
+             e recebe a foto 16:9; um tablet em pé recebe a de retrato, que é
+             o caso em que ele se parece com o celular. -->
+        <picture>
+          <source media="(orientation: portrait) and (max-width: 1023px)" srcset="assets/img/hero/produtor-rural-credito-agronegocio-mobile.webp" type="image/webp" width="540" height="960" />
+          <img src="assets/img/hero/produtor-rural-credito-agronegocio.jpg" alt="" aria-hidden="true" width="1920" height="1080" fetchpriority="high" decoding="async" class="absolute inset-0 h-full w-full object-cover" style="object-position: 50% 12%" />
+        </picture>
         <div class="hero-overlay absolute inset-0"></div>
 
         <!-- Cartões flutuando perto do corpo do Caio — título grande + legenda
