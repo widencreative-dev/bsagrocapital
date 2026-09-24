@@ -547,8 +547,7 @@
                 <p class="lead mt-3 text-graphite-600">Unimos conhecimento do agro, análise financeira e acesso a diferentes fontes de capital para construir operações de acordo com a realidade de cada cliente.</p>
               </div>
 
-              <div class="diferenciais-carousel__viewport mt-8">
-              <div class="diferenciais-carousel__track" data-carousel-track tabindex="0" role="region" aria-label="Diferenciais da BS Agro Capital, role para o lado ou use as setas abaixo">
+              <div class="diferenciais-carousel__track mt-8" data-carousel-track tabindex="0" role="region" aria-label="Diferenciais da BS Agro Capital, role para o lado ou use as setas abaixo">
                 <div class="diferenciais-carousel__card">
                   <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22 16 8" /> <path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z" /> <path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /></svg></span>
                   <h4 class="mt-5 text-xl font-semibold leading-snug text-graphite-900">Conhecimento do agro</h4>
@@ -581,14 +580,14 @@
                 </div>
               </div>
 
-              <button type="button" class="diferenciais-carousel__nav diferenciais-carousel__nav--prev" data-carousel-prev aria-label="Ver diferencial anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 5 5 12 12 19"></polyline></svg></button>
-              <button type="button" class="diferenciais-carousel__nav diferenciais-carousel__nav--next" data-carousel-next aria-label="Ver próximo diferencial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
-              </div>
-
-              <div class="mt-8 flex justify-center">
+              <!-- Setas nas pontas da barra de progresso, fora da faixa de
+                   cartões: ver .diferenciais-carousel__controles no CSS. -->
+              <div class="diferenciais-carousel__controles mt-8">
+                <button type="button" class="diferenciais-carousel__nav" data-carousel-prev aria-label="Ver diferencial anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 5 5 12 12 19"></polyline></svg></button>
                 <div class="diferenciais-carousel__progress" aria-hidden="true">
                   <span class="diferenciais-carousel__progress-fill" data-carousel-progress></span>
                 </div>
+                <button type="button" class="diferenciais-carousel__nav" data-carousel-next aria-label="Ver próximo diferencial"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></button>
               </div>
             </div>
           </div>

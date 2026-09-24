@@ -1250,40 +1250,22 @@ h6 {
    JS (ver "Carrossel de diferenciais" no <script> do fim da página) direto
    pra ponta (esquerda = primeiro cartão, direita = último), e o mesmo JS
    recalcula a barra de progresso a cada evento de scroll.
-   As setas só aparecem a partir de 640px (ver .diferenciais-carousel__nav
-   abaixo). Antes elas ficavam grudadas na borda do carrossel inteiro,
-   meio pra fora — só que o scroll-snap sempre trava ALGUM cartão exatamente
-   flush contra essa mesma borda (é o que "scroll-snap-align: start" faz),
-   então a seta sempre acabava mordendo a borda de algum cartão, em
-   qualquer página do carrossel, não só na primeira ou na última. A partir
-   de 640px, .diferenciais-carousel__viewport reserva um corredor próprio
-   nas laterais (padding-inline) só pras setas — elas ficam ali fora,
-   nunca sobrepõem cartão nenhum, em nenhuma posição do scroll. No celular
-   esse corredor não cabe (a seção só tem ~24px de respiro nas bordas pra
-   um botão de 44px), então as setas ficam escondidas ali e quem navega é o
-   arrasto/swipe — interação nativa esperada num carrossel em tela de
-   toque, e a barra de progresso continua dando o feedback visual.
+   As setas ficam nas pontas da barra de progresso, embaixo do carrossel
+   (ver .diferenciais-carousel__controles), e não flutuando nas laterais da
+   faixa de cartões. Ali elas já foram tentadas de três jeitos — grudadas na
+   borda, num corredor de 3.5rem e num de 4.5rem — e em todos parecia que
+   estavam por cima do cartão: o scroll-snap sempre trava ALGUM cartão flush
+   contra a borda do viewport (é o que "scroll-snap-align: start" faz), e
+   cartão, corredor e seta têm todos o mesmo fundo (--color-paper), então não
+   existe distância nem contraste que separe as duas coisas de forma
+   confiável. Embaixo o problema simplesmente não acontece, em nenhuma
+   posição do scroll — e as setas passam a servir também no celular, onde o
+   corredor lateral não cabia e elas ficavam escondidas.
    O número de cartões por "página" nunca é fixo em JS: cada cartão ocupa uma
    fração da largura do track (33% no desktop, 50% no tablet, 85% no
    celular, deixando o próximo cartão espiar na borda), então quantos cabem
    por vez já é decidido pelo CSS — inclusive se algum dia entrar um sétimo
    diferencial, o carrossel continua funcionando sem tocar no JS. */
-.diferenciais-carousel__viewport {
-  position: relative;
-}
-
-/* 4.5rem, não 3.5rem: o corredor precisa caber a seta (2.75rem) MAIS uma
-   folga que a separe do cartão. Com 3.5rem sobravam 6px entre a borda da
-   seta e a borda do primeiro cartão — e como os dois têm o mesmo fundo
-   (--color-paper) e bordas igualmente discretas, a essa distância eles se
-   fundem e a seta parece estar por cima do cartão, tampando-o. Nada
-   sobrepunha nada de fato; faltava respiro pra leitura separar as duas
-   coisas. Agora sobram 22px. */
-@media (min-width: 640px) {
-  .diferenciais-carousel__viewport {
-    padding-inline: 4.5rem;
-  }
-}
 
 .diferenciais-carousel__track {
   display: flex;
@@ -1341,7 +1323,9 @@ h6 {
 .diferenciais-carousel__progress {
   position: relative;
   height: 2px;
-  width: min(24rem, 80vw);
+  /* Estica entre as duas setas, ocupando toda a largura que sobra da linha. */
+  flex: 1 1 auto;
+  min-width: 0;
   border-radius: 999px;
   background-color: color-mix(in srgb, var(--color-graphite-900) 12%, transparent);
 }
@@ -1355,46 +1339,42 @@ h6 {
   transition: width 0.2s ease;
 }
 
+/* Linha de controles embaixo do carrossel, na largura inteira da faixa de
+   cartões: seta anterior colada na ponta esquerda, seta seguinte na ponta
+   direita e a barra de progresso esticada entre as duas. Centralizar o
+   conjunto (que era o que estava aqui antes) deixava um vazio grande entre a
+   borda dos cartões e a primeira seta — a mesma faixa branca que o corredor
+   lateral criava, só que embaixo. */
+.diferenciais-carousel__controles {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
 .diferenciais-carousel__nav {
-  /* Escondida por padrão (celular, sem corredor lateral pra caber sem
-     sobrepor cartão) — reaparece em .diferenciais-carousel__viewport no
-     breakpoint de 640px, junto com o padding-inline que abre espaço pra
-     ela. */
-  display: none;
-  position: absolute;
-  top: 50%;
-  z-index: 2;
+  /* Só a seta, sem o círculo (borda + fundo + sombra) que ela tinha quando
+     ficava na lateral: lá o botão e o cartão dividiam o mesmo fundo
+     (--color-paper), e o círculo lia como um pedaço do cartão. Aqui embaixo,
+     longe da faixa de cartões, a seta sozinha já basta como sinal de "dá pra
+     passar pro lado". A área de clique continua sendo os 2.75rem do botão —
+     alvo de toque confortável no celular, onde agora ela também aparece — e o
+     border-radius fica pro anel de foco do teclado. O border/background/padding
+     zerados não são redundância do preflight do Tailwind: são o que garante
+     que sobre só a seta se o preflight sair do caminho. */
+  display: flex;
   height: 2.75rem;
   width: 2.75rem;
   flex: none;
   align-items: center;
   justify-content: center;
+  border: 0;
   border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--color-graphite-900) 15%, transparent);
-  background-color: var(--color-paper);
+  background: none;
+  padding: 0;
   color: var(--color-graphite-900);
   cursor: pointer;
-  box-shadow: var(--shadow-soft, 0 20px 45px -20px rgb(23 27 36 / 0.25));
-  transition: border-color 0.2s ease, color 0.2s ease, opacity 0.25s ease,
-    visibility 0.25s ease;
-}
-
-@media (min-width: 640px) {
-  .diferenciais-carousel__nav {
-    display: flex;
-  }
-}
-
-/* Dentro do corredor reservado pelo padding-inline do viewport — nunca em
-   cima da faixa de cartões, então nunca sobrepõe conteúdo nenhum. */
-.diferenciais-carousel__nav--prev {
-  left: 0.375rem;
-  transform: translateY(-50%);
-}
-
-.diferenciais-carousel__nav--next {
-  right: 0.375rem;
-  transform: translateY(-50%);
+  transition: color 0.2s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
 
 /* Seta desativada: some de vista. O estado vem do atributo disabled, posto
@@ -1408,13 +1388,12 @@ h6 {
 }
 
 .diferenciais-carousel__nav svg {
-  height: 1.125rem;
-  width: 1.125rem;
+  height: 1.5rem;
+  width: 1.5rem;
 }
 
 .diferenciais-carousel__nav:hover,
 .diferenciais-carousel__nav:focus-visible {
-  border-color: var(--color-gold-500);
   color: var(--color-gold-700);
 }
 
