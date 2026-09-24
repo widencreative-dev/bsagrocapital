@@ -77,11 +77,8 @@
 
   --color-paper: #fbf9f4;
 
-  /* Medido com a logo cheia (h-12 mobile / h-14 a partir de sm:), que é maior
-     que o wordmark antigo. 113px é a altura em sm: e acima; no mobile
-     (105px) sobra um respiro extra inofensivo abaixo do header — melhor
-     isso do que o conteúdo ficar parcialmente escondido atrás dele. */
-  --header-height: 113px;
+  /* Pílula de 64px + 12px de respiro no topo (ver `#site-header`) + folga. */
+  --header-height: 88px;
 }
 
 /* --------------------------------------------------------------------------
@@ -115,9 +112,16 @@ h6 {
   letter-spacing: -0.015em;
 }
 
-/* Texto de destaque que não é heading (citações, números, rótulos de botão). */
+/* Texto de destaque que não é heading (citações, números, rótulos de botão).
+   font-variant-numeric: a Raleway usa algarismos old-style por padrão —
+   números como "3" e "9" descem abaixo da linha de base, do jeito que uma
+   letra minúscula desceria. Do lado de texto maiúsculo (ex.: os indicadores
+   da Trajetória, com .uppercase) isso lê como se o número estivesse em
+   caixa baixa. "lining-nums" força todo algarismo pra altura da caixa-alta,
+   em qualquer texto que use a fonte de destaque. */
 .font-display {
   font-family: var(--font-display);
+  font-variant-numeric: lining-nums;
 }
 
 /* Parágrafo de abertura: Roboto Light em corpo maior. */
@@ -147,81 +151,105 @@ h6 {
 }
 
 /* --------------------------------------------------------------------------
-   4. Header — glassmorphism
-   Transparente sobre a foto do hero; ao sair do hero vira vidro fosco.
-   -------------------------------------------------------------------------- */
+   4. Header — pílula flutuante em glassmorphism
+   Sempre em vidro fosco, sobre qualquer fundo (foto do hero ou seção normal)
+   — diferente da versão anterior, não alterna mais entre transparente e
+   sólido no scroll. Só os links de navegação ficam dentro da pílula de
+   vidro (.header-pill); a logo e o botão "Solicitar análise" ficam soltos,
+   direto na barra transparente, como no site de referência. */
 #site-header {
   position: fixed;
-  top: 0;
-  z-index: 50;
-  width: 100%;
-  background-color: transparent;
-  border-bottom: 1px solid transparent;
-  transition: background-color 300ms ease, border-color 300ms ease,
-    backdrop-filter 300ms ease, box-shadow 300ms ease;
+  inset-inline: 0;
+  top: 0.75rem;
+  /* 55, não 50: precisa vencer o z-index: 51 do .solucoes-featured__portrait
+     (a foto que escapa do cartão de Soluções) — com o header aparecendo e
+     sumindo ao rolar, ele precisa ficar por cima de qualquer conteúdo da
+     página sempre que estiver visível, nunca atrás. */
+  z-index: 55;
+  transition: transform 0.3s ease;
 }
 
-#site-header[data-solid="true"] {
-  background-color: color-mix(in srgb, var(--color-paper) 72%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--color-olive-900) 12%, transparent);
-  backdrop-filter: blur(14px) saturate(140%);
-  -webkit-backdrop-filter: blur(14px) saturate(140%);
-  box-shadow: 0 8px 30px -18px rgb(16 19 26 / 0.35);
+/* Sobe pra fora da tela ao descer a página, volta ao subir — ver "Header:
+   esconde ao descer" no <script> do fim da página, que alterna essa classe
+   comparando a posição do scroll a cada evento. O deslocamento soma o
+   próprio "top: 0.75rem" pra garantir que a pílula suma por completo, sem
+   deixar nem uma tira visível colada no topo. */
+#site-header.header--escondido {
+  transform: translateY(calc(-100% - 0.75rem));
+}
+
+.header-pill {
+  position: relative;
+  isolation: isolate;
+  border-radius: 999px;
+  border: 1px solid rgb(255 255 255 / 0.4);
+  background: linear-gradient(
+    165deg,
+    rgb(255 255 255 / 0.5) 0%,
+    rgb(255 255 255 / 0.22) 45%,
+    rgb(255 255 255 / 0.32) 100%
+  );
+  backdrop-filter: blur(26px) saturate(190%);
+  -webkit-backdrop-filter: blur(26px) saturate(190%);
+  box-shadow:
+    0 20px 45px -20px rgb(16 19 26 / 0.4),
+    inset 0 1px 1px rgb(255 255 255 / 0.85),
+    inset 0 -1px 1px rgb(255 255 255 / 0.2),
+    inset 0 0 0 1px rgb(255 255 255 / 0.08);
+}
+
+/* Realce especular: uma faixa de luz na diagonal, como a refração de uma
+   borda de vidro de verdade — é o que diferencia "liquid glass" do
+   glassmorphism plano de antes. Fica atrás do conteúdo (z-index -1) e não
+   interfere no clique dos links. */
+.header-pill::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  background: linear-gradient(
+    115deg,
+    rgb(255 255 255 / 0.55) 0%,
+    rgb(255 255 255 / 0) 30%,
+    rgb(255 255 255 / 0) 70%,
+    rgb(255 255 255 / 0.3) 100%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Mesmo tratamento de vidro, só que com cantos menos arredondados — o menu
+   mobile não comporta uma lista de links em várias linhas dentro de uma
+   pílula de verdade. */
+.header-pill--menu {
+  border-radius: 28px;
 }
 
 /* Se o navegador não suporta backdrop-filter, o fundo precisa ser opaco para
    o texto continuar legível. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  #site-header[data-solid="true"] {
-    background-color: var(--color-paper);
+  .header-pill {
+    background: rgb(255 255 255 / 0.95);
+  }
+
+  .header-pill::before {
+    content: none;
   }
 }
 
-.header-text {
-  color: var(--color-paper);
-  text-shadow: 0 1px 3px rgb(0 0 0 / 0.35);
-  transition: color 300ms ease, text-shadow 300ms ease;
-}
-
-#site-header[data-solid="true"] .header-text {
-  color: var(--color-graphite-900);
-  text-shadow: none;
-}
-
-/* Seção visível no momento: sublinhado na própria cor do texto. Um dourado
-   fixo ficaria abaixo de 3:1 sobre o header claro. */
+/* Link da seção visível no momento — vira uma pílula preenchida dentro da
+   pílula de vidro do menu, como o item ativo do site de referência. */
 .nav-link[aria-current="true"] {
-  text-decoration: underline;
-  text-decoration-color: currentColor;
-  text-decoration-thickness: 2px;
-  text-underline-offset: 6px;
+  background-color: color-mix(in srgb, var(--color-gold-500) 20%, transparent);
+  color: var(--color-olive-900);
 }
 
-#mobile-menu .nav-link[aria-current="true"] {
-  color: var(--color-olive-700);
-}
-
-/* Alterna o logotipo dourado (header sólido) e o branco (sobre a foto). */
-.logo-gold,
-.logo-white {
-  transition: opacity 300ms ease;
-}
-
-.logo-gold {
-  opacity: 0;
-}
-
-.logo-white {
-  opacity: 1;
-  filter: drop-shadow(0 1px 3px rgb(0 0 0 / 0.4));
-}
-
-#site-header[data-solid="true"] .logo-gold {
-  opacity: 1;
-}
-
-#site-header[data-solid="true"] .logo-white {
-  opacity: 0;
+/* A logo fica solta na barra transparente (sem fundo próprio), então precisa
+   da própria sombra pra continuar legível tanto sobre a foto do hero quanto
+   sobre uma seção clara mais abaixo. */
+.site-logo img {
+  filter: drop-shadow(0 1px 2px rgb(16 19 26 / 0.35));
 }
 
 /* --------------------------------------------------------------------------
@@ -236,49 +264,120 @@ h6 {
   );
 }
 
-.hero-ornament {
-  animation: hero-ornament-spin 9s linear infinite;
-  transform-origin: 50% 50%;
+/* Mesma ideia do .hero-overlay, mas pra seção do formulário final: o
+   conteúdo (headline + cartão) fica espalhado do topo ao fundo da seção,
+   não só grudado embaixo como no hero, então o véu é quase uniforme em vez
+   de um gradiente forte num sentido só. A cor é olive-900 (não graphite,
+   como no hero) pra manter a identidade da seção — o texto continua claro
+   por cima, então o contraste é o mesmo de antes, só que agora tem uma foto
+   por baixo do véu em vez de fundo sólido. */
+.form-section-overlay {
+  background-image: linear-gradient(
+    180deg,
+    rgb(13 53 39 / 0.88) 0%,
+    rgb(13 53 39 / 0.82) 100%
+  );
 }
 
-@keyframes hero-ornament-spin {
-  to {
-    transform: rotate(360deg);
+@keyframes hero-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
   }
 }
 
+/* Cartões flutuando perto do corpo do Caio — ícone redondo à esquerda +
+   texto em caixa alta à direita, a partir de uma referência que o cliente
+   mandou. Cada um usa um animation-delay negativo diferente (ver HTML) só
+   pra começar em um ponto diferente do ciclo do @keyframes hero-float —
+   sem isso, os quatro subiriam e desceriam em sincronia perfeita, o que lê
+   como "travado" em vez de orgânico. */
+.hero-chip {
+  display: inline-flex;
+  width: fit-content;
+  max-width: 14.5rem;
+  border-radius: 18px;
+  border: 1px solid rgb(255 255 255 / 0.18);
+  background-color: rgb(16 19 26 / 0.42);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  padding: 0.625rem 1.125rem;
+  animation: hero-float 5.5s ease-in-out infinite;
+}
+
+/* Título grande + legenda menor embaixo — mesmo par que os antigos
+   .hero-stat__number/__label (removidos: eram só usados aqui). */
+.hero-chip__title {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-gold-300);
+}
+
+.hero-chip__label {
+  margin-top: 0.2rem;
+  font-size: 0.75rem;
+  line-height: 1.35;
+  color: rgb(255 255 255 / 0.78);
+}
+
+/* Título com a primeira palavra em escala bem maior que o resto da frase —
+   mesmo princípio do "Solar Power" gigante do site de referência. */
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.hero-headline__big {
+  font-size: clamp(4rem, 11vw, 8.5rem);
+  line-height: 0.92;
+}
+
+.hero-headline__rest {
+  font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+  line-height: 1.15;
+}
+
 /* --------------------------------------------------------------------------
-   6. CTA — pílula com ícone circular
-   O botão mantém o mesmo tamanho sempre; no hover, o padding inverte de lado
-   (o espaço reservado pro círculo passa da direita pra esquerda) e o círculo
-   do ícone desliza acompanhando, girando 45°. 100% CSS, sem JavaScript.
-   .cta-btn sozinho (sem .cta-btn--icon) é o botão sem ícone, ex.: "Voltar" —
-   nesse caso o hover é só o leve levantar (translateY) e o brilho da sombra.
+   6. CTA — pílula com preenchimento expansivo
+   Efeito portado do botão "InteractiveHoverButton" do design system da
+   GFlow: um ponto no canto esquerdo (::before) expande no hover até cobrir
+   o botão inteiro, trocando a cor de fundo; nas variantes com seta
+   (.cta-btn--icon) o texto desliza pra fora enquanto uma cópia do texto + a
+   seta desliza por baixo pra dentro. .cta-btn sozinho (sem .cta-btn--icon,
+   ex.: "Voltar") só tem o preenchimento — sem texto duplicado, porque não
+   há seta pra revelar. 100% CSS, sem JavaScript.
+   O ponto é pseudo-elemento (não span) de propósito: assim todo .cta-btn
+   ganha o efeito de graça, sem precisar de markup extra nos botões sem seta.
    Variantes: padrão (dourado), .cta-btn--outline (fundos escuros), .cta-btn--dark
    (fundos claros) e .cta-btn--block (ocupa a largura do contêiner).
    -------------------------------------------------------------------------- */
+/* Portado 1:1 do .btn da GFlow, trocando só a paleta. De propósito NÃO tem
+   gradiente, brilho, pulo no hover nem encolher no clique: o botão de
+   referência é chapado e o único movimento é o preenchimento crescendo. A
+   altura sai do padding (como lá), não de um height fixo — as variantes
+   continuam com a mesma altura entre si porque todas têm a borda de 1px. */
 .cta-btn {
+  --cta-fill: var(--color-graphite-950);
+  --cta-hover-fg: var(--color-paper);
   position: relative;
   display: inline-flex;
   width: fit-content;
-  height: 3.25rem;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  /* Borda transparente também na variante preenchida: no hero ela aparece ao
-     lado da vazada, e sem isso as alturas não bateriam. */
-  border: 1.5px solid transparent;
+  border: 1px solid var(--color-gold-500);
   border-radius: 100px;
-  /* background-color é o retrocesso para navegadores sem suporte a
-     gradientes; background-image é o que realmente aparece. */
   background-color: var(--color-gold-500);
-  background-image: linear-gradient(
-    90deg,
-    var(--color-gold-600) 0%,
-    var(--color-gold-500) 55%,
-    var(--color-gold-400) 100%
-  );
-  padding: 0 2.25rem;
+  /* Assimétrico: os 2.375rem à esquerda reservam o espaço em repouso do
+     ponto, igual ao botão de referência da GFlow. */
+  padding: 0.875rem 1.625rem 0.875rem 2.375rem;
   font-family: var(--font-display);
   font-size: 1rem;
   font-weight: 600;
@@ -287,157 +386,159 @@ h6 {
   color: var(--color-graphite-950);
   text-decoration: none;
   cursor: pointer;
-  /* O anel de 1px cobre a linha de anti-aliasing que o Chrome no Windows deixa
-     visível em telas com escala fracionária; gold-500 é o tom do meio do
-     gradiente, então o anel casa com as duas pontas (gold-600 à esquerda,
-     gold-400 à direita). O texto graphite-950 mantém pelo menos 5,71:1 de
-     contraste em qualquer ponto do gradiente — o extremo mais escuro
-     (gold-600) é o pior caso. */
-  box-shadow: 0 0 0 1px var(--color-gold-500), 0 10px 25px -6px rgb(184 134 11 / 0.5);
-  /* padding-inline (não padding) porque é a propriedade que .cta-btn--icon
-     realmente altera no hover — são propriedades diferentes mesmo resolvendo
-     pros mesmos lados em LTR, e transition-property só cobre a que for
-     nomeada explicitamente. */
-  transition: padding-inline 0.5s cubic-bezier(0.65, 0, 0.35, 1), transform 0.3s ease, box-shadow 0.3s ease,
-    border-color 0.3s ease;
-}
-
-/* Reserva o espaço do círculo (2.75rem) mais a folga (0.25rem) de cada lado do
-   ícone; no hover o padding espelha, "empurrando" o texto pro lado oposto. */
-.cta-btn--icon {
-  padding-inline: 1.75rem 3.75rem;
-}
-
-.cta-btn--icon:hover,
-.cta-btn--icon:focus-visible {
-  padding-inline: 3.75rem 1.75rem;
+  transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .cta-btn:hover,
 .cta-btn:focus-visible {
-  transform: translateY(-2px);
-  box-shadow: 0 0 0 1px var(--color-gold-500), 0 16px 34px -6px rgb(184 134 11 / 0.65);
+  color: var(--cta-hover-fg);
 }
 
-.cta-btn:active {
-  transform: scale(0.96);
+/* O ponto em repouso — vira o preenchimento que toma o botão inteiro no
+   hover. Portado 1:1 do .btn-dot da GFlow: a caixa cresce de 8×8 no canto
+   esquerdo até 100%×100%, e o scale(1.8) por cima garante que o excesso
+   estoure os cantos (o overflow: hidden da regra base corta seguindo a
+   curva da pílula).
+   O border-radius de 8px é o detalhe que faz o efeito: num quadrado de 8px
+   os raios se sobrepõem e o browser os reduz pra 4px, então em repouso é um
+   círculo perfeito; conforme a caixa cresce, os mesmos 8px viram cantos
+   discretos e a forma lê como um retângulo preenchendo o botão. Com 50% no
+   lugar disso a caixa vira uma elipse no meio do caminho — que era o que
+   estava errado aqui antes. */
+.cta-btn::before {
+  content: "";
+  position: absolute;
+  left: 1.125rem;
+  top: calc(50% - 0.25rem);
+  z-index: 1;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 8px;
+  background: var(--cta-fill);
+  transform: scale(1);
+  transition: left 0.3s ease, top 0.3s ease, width 0.3s ease, height 0.3s ease,
+    transform 0.3s ease;
 }
 
+.cta-btn:hover::before,
+.cta-btn:focus-visible::before {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  transform: scale(1.8);
+}
+
+/* O translateX(4px) em repouso vem da referência: é o respiro entre o ponto
+   e a primeira letra. */
 .cta-btn__text {
   position: relative;
-  z-index: 1;
+  z-index: 2;
+  display: inline-block;
+  transform: translateX(4px);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Círculo com o ícone, encostado na borda direita por padrão. Fica com a cor
-   do papel (o "fundo neutro" do site) pra ler como um recorte claro sobre
-   qualquer variante do botão.
-   Centralizar com margin-top (não translateY) é proposital: assim o
-   deslizar (right, uma propriedade de layout) fica isolado num elemento que
-   só anima "right", e o giro (transform, acelerado por GPU) fica isolado no
-   svg filho — misturar os dois tipos de animação no mesmo elemento é o que
-   fazia o deslizar "pular" em vez de escorregar em alguns navegadores. */
-.cta-btn__icon {
+/* Só nos botões com seta o preenchimento passa POR CIMA do rótulo, como na
+   referência (lá o .btn-dot é o último elemento do botão; aqui é um
+   ::before, então quem reproduz isso é o z-index). Dá pra fazer porque o
+   rótulo some no hover e quem reexibe o texto é a camada duplicada. Sem
+   seta não existe duplicata, então o rótulo tem que continuar por cima — por
+   isso a regra é escopada em vez de valer pra todo .cta-btn__text. */
+.cta-btn--icon .cta-btn__text {
+  z-index: 0;
+}
+
+.cta-btn--icon:hover .cta-btn__text,
+.cta-btn--icon:focus-visible .cta-btn__text {
+  transform: translateX(3rem);
+  opacity: 0;
+}
+
+/* Camada com a cópia do texto + a seta: escondida à direita em repouso,
+   revelada no hover. aria-hidden porque o texto já foi lido em
+   .cta-btn__text — duplicar aqui é só efeito visual. */
+.cta-btn__hover {
   position: absolute;
-  top: 50%;
-  right: 0.25rem;
-  z-index: 2;
+  top: 0;
+  left: 0;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
   display: flex;
-  height: 2.75rem;
-  width: 2.75rem;
-  margin-top: -1.375rem;
-  flex: none;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background-color: var(--color-paper);
-  transition: right 0.5s cubic-bezier(0.65, 0, 0.35, 1);
+  gap: 0.5rem;
+  opacity: 0;
+  transform: translateX(3rem);
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.cta-btn__icon svg {
-  height: 1rem;
-  width: 1rem;
+.cta-btn__hover svg {
+  height: 1.125rem;
+  width: 1.125rem;
+  flex: none;
   fill: none;
-  stroke: var(--color-graphite-950);
+  stroke: currentColor;
   stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
-  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-/* No hover o círculo desliza até encostar na borda esquerda (mesma folga de
-   0.25rem) e o ícone gira 45°, virando a seta reta numa seta na diagonal. */
-.cta-btn--icon:hover .cta-btn__icon,
-.cta-btn--icon:focus-visible .cta-btn__icon {
-  right: calc(100% - 3rem);
-}
-
-.cta-btn--icon:hover .cta-btn__icon svg,
-.cta-btn--icon:focus-visible .cta-btn__icon svg {
-  transform: rotate(45deg);
+.cta-btn--icon:hover .cta-btn__hover,
+.cta-btn--icon:focus-visible .cta-btn__hover {
+  transform: translateX(-0.25rem);
+  opacity: 1;
 }
 
 /* Variante para fundos escuros. A borda usa 45% de opacidade (e não 40%) para
-   ficar acima de 3:1 sobre o verde-floresta. */
+   ficar acima de 3:1 sobre o verde-floresta. O preenchimento no hover é
+   dourado, com texto grafite por cima — inverte o contraste do botão. */
 .cta-btn--outline {
+  --cta-fill: var(--color-gold-500);
+  --cta-hover-fg: var(--color-graphite-950);
   background-color: transparent;
-  /* background-color sozinho não basta: background-image é uma propriedade
-     independente e continuaria herdando o gradiente dourado da regra base,
-     aparecendo por trás do que deveria ser um botão transparente. */
-  background-image: none;
   border-color: color-mix(in srgb, var(--color-paper) 45%, transparent);
   color: var(--color-paper);
-  box-shadow: none;
 }
 
 .cta-btn--outline:hover,
 .cta-btn--outline:focus-visible {
-  border-color: var(--color-paper);
-  box-shadow: none;
+  border-color: var(--color-gold-500);
 }
 
 /* Variante para fundos claros. Borda em 60%: com os 40% da referência daria
-   2,28:1 sobre o papel, abaixo do mínimo de 3:1. */
+   2,28:1 sobre o papel, abaixo do mínimo de 3:1. O preenchimento no hover é
+   oliva-900 (a mesma cor da borda), com texto claro por cima. */
 .cta-btn--dark {
+  --cta-fill: var(--color-olive-900);
+  --cta-hover-fg: var(--color-paper);
   background-color: transparent;
-  background-image: none;
   border-color: color-mix(in srgb, var(--color-olive-900) 60%, transparent);
   color: var(--color-graphite-950);
-  box-shadow: none;
 }
 
 .cta-btn--dark:hover,
 .cta-btn--dark:focus-visible {
   border-color: var(--color-olive-900);
-  box-shadow: none;
 }
 
-/* Telas bem estreitas: reduz um pouco a fonte e o círculo pra rótulos longos
-   ("Solicitar análise de crédito") não brigarem por espaço com o ícone. O
-   botão continua em uma linha só (não quebra) — é assim que essa pílula com
-   ícone deslizante funciona. */
+/* Variante verde do WhatsApp — mesma mecânica das outras (preenchimento e
+   texto seguem herdando de .cta-btn, só a cor de fundo muda), com o verde
+   oficial #25D366 (mesmo tom do .whatsapp-fab) no lugar do dourado. Texto
+   continua graphite-950 (herdado da base) e passa de 4,5:1 sobre esse
+   verde. */
+.cta-btn--whatsapp {
+  background-color: #25d366;
+  border-color: #25d366;
+}
+
+/* Telas bem estreitas: reduz um pouco a fonte pra rótulos longos ("Solicitar
+   análise de crédito") não brigarem por espaço. O botão continua em uma
+   linha só (não quebra). */
 @media (max-width: 420px) {
   .cta-btn {
     font-size: 0.9375rem;
-  }
-
-  .cta-btn--icon {
-    padding-inline: 1.5rem 3.25rem;
-  }
-
-  .cta-btn--icon:hover,
-  .cta-btn--icon:focus-visible {
-    padding-inline: 3.25rem 1.5rem;
-  }
-
-  .cta-btn__icon {
-    height: 2.5rem;
-    width: 2.5rem;
-    margin-top: -1.25rem;
-  }
-
-  .cta-btn--icon:hover .cta-btn__icon,
-  .cta-btn--icon:focus-visible .cta-btn__icon {
-    right: calc(100% - 2.75rem);
   }
 }
 
@@ -449,6 +550,15 @@ h6 {
    entre este arquivo e o CSS gerado pelo Tailwind CDN. */
 .cta-btn--block {
   width: 100%;
+}
+
+/* Botão mais comprido que o natural, mantendo a forma de pílula (só o
+   border-radius de 100px já garante isso, qualquer que seja a largura) —
+   usado quando o botão precisa se destacar mais sozinho, centralizado, em
+   vez de ocupar só o espaço do próprio texto. */
+.cta-btn--wide {
+  width: 100%;
+  max-width: 26rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -756,20 +866,33 @@ h6 {
   color: rgb(255 255 255 / 0.75);
 }
 
+/* 9a-bis. Cards de "Atuação especializada" — mesmo hover-reveal dos cards de
+   soluções acima: ao passar o mouse por um, o outro esmaece e desfoca
+   levemente, e o cartão sob o cursor (ou com foco de teclado num link de
+   dentro dele) ganha destaque com escala maior e nitidez total. */
+.atuacao-card {
+  transition: transform 0.5s ease, opacity 0.5s ease, filter 0.5s ease;
+}
+
+.atuacao-cards:hover .atuacao-card {
+  transform: scale(0.97);
+  opacity: 0.65;
+  filter: blur(2px);
+}
+
+.atuacao-cards .atuacao-card:hover,
+.atuacao-cards .atuacao-card:focus-within {
+  transform: scale(1.02);
+  opacity: 1;
+  filter: none;
+  z-index: 2;
+}
+
 /* Cartão grande em destaque ("Solução mais procurada"): foto de fundo com um
    véu verde-oliva por cima (mesmo tom do bg-olive-900 que existia antes, só
    que agora sobre a imagem) pra manter o texto legível em qualquer ponto da
-   foto. No hover, o CARTÃO INTEIRO salta pra frente (escala + sombra maior,
-   z-index acima do véu) e o resto do site desfoca atrás dele — quem faz esse
-   desfoque é o #site-blur-backdrop (ver 9c mais abaixo), via :has(), sem
-   precisar de JavaScript. O conteúdo (texto, ícone, botão) fica em
-   .solucoes-featured__content, que tem z-index próprio pra nunca ficar por
-   baixo da imagem.
-   Só :hover, sem :focus-within: o botão "Solicitar análise" mora dentro
-   deste cartão e aponta para a âncora do formulário (#solicitar-analise) —
-   ao clicar, o foco fica retido no link mesmo depois da página rolar até o
-   formulário, então :focus-within nunca deixava de bater e o desfoque de
-   fundo ficava travado ligado indefinidamente sobre o formulário. */
+   foto. O conteúdo (texto, ícone, botão) fica em .solucoes-featured__content,
+   que tem z-index próprio pra nunca ficar por baixo da imagem. */
 .solucoes-featured {
   position: relative;
   z-index: 1;
@@ -777,13 +900,6 @@ h6 {
   border-radius: 20px;
   color: var(--color-paper);
   background-color: var(--color-olive-900);
-  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s ease;
-}
-
-.solucoes-featured:hover {
-  transform: scale(1.035);
-  z-index: 46;
-  box-shadow: 0 35px 70px -20px rgb(8 10 13 / 0.55);
 }
 
 .solucoes-featured__img {
@@ -810,27 +926,31 @@ h6 {
   z-index: 1;
 }
 
-/* --------------------------------------------------------------------------
-   9c. Desfoque do site atrás do cartão em destaque
-   Camada fixa cobrindo a tela inteira, atrás do cartão (z-index 45, abaixo
-   dos 46 do cartão em hover, mas acima do conteúdo normal da página).
-   body:has(...) liga o desfoque sem JavaScript algum: funciona em qualquer
-   navegador moderno, e nos poucos que não suportam :has() o cartão continua
-   saltando pra frente normalmente, só sem o desfoque de fundo. pointer-events
-   none pra nunca atrapalhar clique/hover em nada por baixo. */
-#site-blur-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 45;
+/* Retrato que escapa do cartão por cima, encostado no canto inferior direito.
+   Sibling do .solucoes-featured (não filho) de propósito: o cartão tem
+   overflow: hidden para as bordas arredondadas, e um filho não conseguiria
+   estourar esse recorte. pointer-events: none porque é puramente decorativo:
+   sem isso, passar o mouse sobre a foto (que visualmente fica sobre o
+   cartão) bloquearia o :hover dos elementos por baixo. */
+.solucoes-featured__portrait {
+  position: absolute;
+  right: clamp(0rem, 1.5vw, 1.25rem);
+  bottom: 0;
+  /* Garante que o retrato fique por cima do .solucoes-featured (o cartão
+     escuro logo antes dele no HTML). NÃO é mais maior que o #site-header
+     de propósito — o header usa z-index: 55 justamente pra vencer esse 51
+     e nunca ficar escondido atrás do retrato ao reaparecer na rolagem
+     (era o contrário antes; ver #site-header no CSS). */
+  z-index: 51;
+  height: clamp(20rem, 38vw, 31rem);
+  width: auto;
   pointer-events: none;
-  backdrop-filter: blur(0px);
-  -webkit-backdrop-filter: blur(0px);
-  transition: backdrop-filter 0.5s ease, -webkit-backdrop-filter 0.5s ease;
 }
 
-body:has(.solucoes-featured:hover) #site-blur-backdrop {
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+@media (max-width: 640px) {
+  .solucoes-featured__portrait {
+    display: none;
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -864,10 +984,16 @@ body:has(.solucoes-featured:hover) #site-blur-backdrop {
    garantir com o site parado numa posição qualquer de rolagem). Cada seção
    que usa vidro define o gradiente que fica por baixo (.bg-mesh-*).
    -------------------------------------------------------------------------- */
+/* Os dois círculos ficam perto do centro vertical (35%/65%), não perto do
+   topo/fundo — uma seção bg-mesh-light quase sempre encosta em cima ou
+   embaixo numa seção bg-paper lisa (sem gradiente nenhum), e um círculo
+   perto da borda concentra o tom ali, criando uma linha de contraste bem
+   visível exatamente na emenda entre as duas — lia como defeito de
+   renderização, não como gradiente de propósito. */
 .bg-mesh-light {
   background-color: var(--color-paper);
-  background-image: radial-gradient(560px circle at 12% 18%, rgb(212 175 55 / 0.10), transparent 60%),
-    radial-gradient(620px circle at 88% 82%, rgb(26 98 71 / 0.10), transparent 60%);
+  background-image: radial-gradient(560px circle at 15% 35%, rgb(212 175 55 / 0.10), transparent 60%),
+    radial-gradient(620px circle at 85% 65%, rgb(26 98 71 / 0.10), transparent 60%);
 }
 
 .bg-mesh-dark {
@@ -962,7 +1088,8 @@ body:has(.solucoes-featured:hover) #site-blur-backdrop {
   animation: partners-marquee-scroll 56s linear infinite;
 }
 
-.partners-marquee:hover .partners-marquee__track,
+/* Só pausa no foco por teclado (não no hover do mouse, a pedido do cliente) —
+   mantém um jeito de pausar pra quem navega via teclado (WCAG 2.2.2). */
 .partners-marquee:focus-within .partners-marquee__track {
   animation-play-state: paused;
 }
@@ -1018,6 +1145,234 @@ body:has(.solucoes-featured:hover) #site-blur-backdrop {
   opacity: 1;
 }
 
+/* Alguns arquivos de logo (Porto Seguro Bank, CashMe, MetLife) têm mais
+   respiro/padding dentro do próprio PNG, então ficam visivelmente menores
+   que os outros mesmo com a caixa do item do mesmo tamanho. Escala só a
+   imagem, centralizada, sem mexer no tamanho da caixa nem no espaçamento
+   da trilha. */
+.partners-marquee__item--lg img {
+  transform: scale(1.6);
+}
+
+/* --------------------------------------------------------------------------
+   9e. Carrossel de diferenciais — com setas e barra de progresso
+   Estrutura pedida pelo cliente a partir de uma referência (site da Cresol):
+   título e legenda centralizados, cartões em caixas com borda (não mais só
+   um filete no topo) e navegação manual por setas, com uma barra fina
+   indicando o progresso da rolagem.
+   Diferente dos carrosséis de loop infinito acima (parceiros, depoimentos),
+   este é rolagem nativa do navegador com scroll-snap — sem transform, sem
+   @keyframes, sem duplicar cartão nenhum. As setas chamam scrollTo() no
+   JS (ver "Carrossel de diferenciais" no <script> do fim da página) direto
+   pra ponta (esquerda = primeiro cartão, direita = último), e o mesmo JS
+   recalcula a barra de progresso a cada evento de scroll.
+   As setas só aparecem a partir de 640px (ver .diferenciais-carousel__nav
+   abaixo). Antes elas ficavam grudadas na borda do carrossel inteiro,
+   meio pra fora — só que o scroll-snap sempre trava ALGUM cartão exatamente
+   flush contra essa mesma borda (é o que "scroll-snap-align: start" faz),
+   então a seta sempre acabava mordendo a borda de algum cartão, em
+   qualquer página do carrossel, não só na primeira ou na última. A partir
+   de 640px, .diferenciais-carousel__viewport reserva um corredor próprio
+   nas laterais (padding-inline) só pras setas — elas ficam ali fora,
+   nunca sobrepõem cartão nenhum, em nenhuma posição do scroll. No celular
+   esse corredor não cabe (a seção só tem ~24px de respiro nas bordas pra
+   um botão de 44px), então as setas ficam escondidas ali e quem navega é o
+   arrasto/swipe — interação nativa esperada num carrossel em tela de
+   toque, e a barra de progresso continua dando o feedback visual.
+   O número de cartões por "página" nunca é fixo em JS: cada cartão ocupa uma
+   fração da largura do track (33% no desktop, 50% no tablet, 85% no
+   celular, deixando o próximo cartão espiar na borda), então quantos cabem
+   por vez já é decidido pelo CSS — inclusive se algum dia entrar um sétimo
+   diferencial, o carrossel continua funcionando sem tocar no JS. */
+.diferenciais-carousel__viewport {
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .diferenciais-carousel__viewport {
+    padding-inline: 3.5rem;
+  }
+}
+
+.diferenciais-carousel__track {
+  display: flex;
+  gap: 1.5rem;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 1px;
+  /* Esconde a barra de rolagem nativa nos navegadores que suportam — a
+     navegação visível é a barra de progresso + as setas abaixo, não a
+     scrollbar do sistema. */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.diferenciais-carousel__track::-webkit-scrollbar {
+  display: none;
+}
+
+.diferenciais-carousel__card {
+  flex: 0 0 auto;
+  scroll-snap-align: start;
+  /* 85%: deixa o próximo cartão espiando na borda direita — a pista de que
+     tem mais conteúdo pra rolar, o mesmo papel que as setas cumprem a
+     partir de 640px (aqui embaixo desse breakpoint elas ficam escondidas,
+     ver .diferenciais-carousel__nav). */
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--color-graphite-900) 15%, transparent);
+  background-color: var(--color-paper);
+  padding: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .diferenciais-carousel__card {
+    width: calc(50% - 0.75rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .diferenciais-carousel__track {
+    gap: 2rem;
+  }
+
+  .diferenciais-carousel__card {
+    width: calc(33.333% - 1.334rem);
+    padding: 2rem;
+  }
+}
+
+/* Trilho fino cinza com um segmento colorido por cima (mesma leitura da
+   referência): a largura do preenchimento é a % de scroll já percorrida,
+   escrita direto no atributo style pelo JS a cada evento de scroll. */
+.diferenciais-carousel__progress {
+  position: relative;
+  height: 2px;
+  width: min(24rem, 80vw);
+  border-radius: 999px;
+  background-color: color-mix(in srgb, var(--color-graphite-900) 12%, transparent);
+}
+
+.diferenciais-carousel__progress-fill {
+  position: absolute;
+  inset-block: 0;
+  left: 0;
+  border-radius: 999px;
+  background-color: var(--color-gold-600);
+  transition: width 0.2s ease;
+}
+
+.diferenciais-carousel__nav {
+  /* Escondida por padrão (celular, sem corredor lateral pra caber sem
+     sobrepor cartão) — reaparece em .diferenciais-carousel__viewport no
+     breakpoint de 640px, junto com o padding-inline que abre espaço pra
+     ela. */
+  display: none;
+  position: absolute;
+  top: 50%;
+  z-index: 2;
+  height: 2.75rem;
+  width: 2.75rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--color-graphite-900) 15%, transparent);
+  background-color: var(--color-paper);
+  color: var(--color-graphite-900);
+  cursor: pointer;
+  box-shadow: var(--shadow-soft, 0 20px 45px -20px rgb(23 27 36 / 0.25));
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .diferenciais-carousel__nav {
+    display: flex;
+  }
+}
+
+/* Dentro do corredor reservado pelo padding-inline do viewport — nunca em
+   cima da faixa de cartões, então nunca sobrepõe conteúdo nenhum. */
+.diferenciais-carousel__nav--prev {
+  left: 0.375rem;
+  transform: translateY(-50%);
+}
+
+.diferenciais-carousel__nav--next {
+  right: 0.375rem;
+  transform: translateY(-50%);
+}
+
+.diferenciais-carousel__nav svg {
+  height: 1.125rem;
+  width: 1.125rem;
+}
+
+.diferenciais-carousel__nav:hover,
+.diferenciais-carousel__nav:focus-visible {
+  border-color: var(--color-gold-500);
+  color: var(--color-gold-700);
+}
+
+/* --------------------------------------------------------------------------
+   9f. FAQ — acordeão nativo
+   <details>/<summary> em vez de um acordeão em JS: teclado, leitor de tela e
+   busca do navegador (Ctrl+F encontra texto dentro de itens fechados) já
+   funcionam de graça, sem precisar reimplementar nada disso. O JS do site
+   não toca aqui — só o CSS abaixo cuida da aparência (esconde o marcador
+   nativo do <summary>, gira o chevron) e o próprio navegador cuida de abrir
+   e fechar. */
+.faq-item {
+  padding-block: 1.25rem;
+}
+
+.faq-item__question {
+  display: flex;
+  cursor: pointer;
+  list-style: none;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-family: var(--font-display);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--color-graphite-900);
+}
+
+/* Marcador padrão do <summary> (a seta do Chrome/Safari): escondido porque
+   o .faq-item__chevron abaixo já cumpre esse papel, com controle de estilo
+   e animação que o marcador nativo não permite. */
+.faq-item__question::-webkit-details-marker {
+  display: none;
+}
+
+.faq-item__question:focus-visible {
+  outline: 2px solid var(--color-gold-500);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.faq-item__chevron {
+  height: 1.25rem;
+  width: 1.25rem;
+  flex: none;
+  color: var(--color-olive-800);
+  transition: transform 0.25s ease;
+}
+
+.faq-item[open] .faq-item__chevron {
+  transform: rotate(180deg);
+}
+
+.faq-item__answer {
+  margin-top: 0.75rem;
+  padding-right: 2rem;
+  line-height: 1.6;
+  color: var(--color-graphite-600);
+}
+
 /* --------------------------------------------------------------------------
    10. Animação de entrada ao rolar
    O elemento só fica invisível se o JS estiver ativo (a classe `js` é posta no
@@ -1034,6 +1389,16 @@ body:has(.solucoes-featured:hover) #site-blur-backdrop {
 .js .revelar.visivel {
   opacity: 1;
   transform: none;
+}
+
+/* Variante lateral: os cartões de Propósito entram vindo da direita, não de
+   baixo pra cima. A regra de chegada (opacity/transform final) continua
+   sendo a de .revelar.visivel acima — só o ponto de partida muda aqui, e por
+   isso essa regra precisa vir DEPOIS de ".js .revelar" no arquivo (mesma
+   especificidade, então quem é declarado por último vence a disputa do
+   transform inicial). */
+.js .revelar--right {
+  transform: translateX(64px);
 }
 
 /* --------------------------------------------------------------------------
@@ -1063,9 +1428,9 @@ body:has(.solucoes-featured:hover) #site-blur-backdrop {
   }
 
   /* Exceção: sem o loop, boa parte das logos de parceiros nunca apareceria
-     pra quem pede menos movimento (só cabem ~5 na largura da tela). O scroll
-     é lento, linear e sem susto, e continua pausável no hover/foco do mouse
-     e teclado — por isso volta a rodar mesmo aqui. */
+     pra quem pede menos movimento (só cabem ~5 na largura da tela). O
+     scroll é lento, linear e sem susto, e continua pausável no hover/foco
+     do mouse e teclado — por isso volta a rodar mesmo aqui. */
   .partners-marquee__track {
     animation-duration: 56s !important;
     animation-iteration-count: infinite !important;
