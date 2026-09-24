@@ -1083,6 +1083,21 @@
 
           function atualizarCarrossel() {
             var maximo = trilhoDif.scrollWidth - trilhoDif.clientWidth;
+
+            /* Cada seta some quando não há mais para onde ir naquela direção:
+               no começo não existe "anterior", no fim não existe "próximo".
+               Some também quando tudo já cabe na tela (máximo 0) e não há o
+               que rolar. Usa o atributo disabled, não só CSS, pra sumir
+               junto da navegação por teclado e do leitor de tela — um botão
+               invisível que ainda recebe foco é pior que um botão inútil.
+               A margem de 1px é porque o scrollLeft vem fracionário em telas
+               com escala não inteira ou zoom: comparar com === nunca acerta
+               as pontas e a seta ficaria presa visível no fim do curso. */
+            var noComeco = trilhoDif.scrollLeft <= 1;
+            var noFim = trilhoDif.scrollLeft >= maximo - 1;
+            btnAnterior.disabled = maximo <= 0 || noComeco;
+            btnProximo.disabled = maximo <= 0 || noFim;
+
             if (maximo <= 0) {
               progressoDif.style.width = "100%";
               return;
