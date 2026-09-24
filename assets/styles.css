@@ -1272,9 +1272,16 @@ h6 {
   position: relative;
 }
 
+/* 4.5rem, não 3.5rem: o corredor precisa caber a seta (2.75rem) MAIS uma
+   folga que a separe do cartão. Com 3.5rem sobravam 6px entre a borda da
+   seta e a borda do primeiro cartão — e como os dois têm o mesmo fundo
+   (--color-paper) e bordas igualmente discretas, a essa distância eles se
+   fundem e a seta parece estar por cima do cartão, tampando-o. Nada
+   sobrepunha nada de fato; faltava respiro pra leitura separar as duas
+   coisas. Agora sobram 22px. */
 @media (min-width: 640px) {
   .diferenciais-carousel__viewport {
-    padding-inline: 3.5rem;
+    padding-inline: 4.5rem;
   }
 }
 
