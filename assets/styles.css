@@ -88,6 +88,45 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 
+/* Bloco de CSS que a documentação do Lenis manda incluir; as classes
+   .lenis* quem põe no <html> é o próprio Lenis. A regra do scroll-behavior
+   existe porque, com o Lenis ativo, é ele quem posiciona a rolagem quadro a
+   quadro: deixar a rolagem suave nativa do navegador ligada junto faz o
+   navegador animar suavemente até um alvo que já está se movendo. Medindo
+   um giro da roda aqui, a diferença não apareceu — mas as duas animações
+   concorrendo é um conflito real e sem motivo pra existir. O smooth vem da
+   seção de movimento reduzido, mais abaixo, onde serve de alternativa pra
+   quando o Lenis não roda; o !important é preciso porque aquela regra está
+   dentro de uma media query. */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+/* A regra oficial do Lenis usa .lenis.lenis-smooth, mas a classe
+   lenis-smooth nem sempre está no <html> (na 1.3 o Lenis põe só "lenis"),
+   e aí o scroll-behavior: smooth do navegador continuava valendo. Basta o
+   Lenis estar ativo pra não querermos a rolagem suave nativa por cima. */
+html.lenis {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 /* Trava de segurança: nada nesta página deveria alargar o viewport (é
    sempre um elemento específico ultrapassando a largura da tela, nunca
    intencional), mas sem isso um único elemento estourando a largura força

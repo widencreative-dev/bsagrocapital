@@ -839,7 +839,7 @@
     </style>
 
     <!-- Lenis: só para o scroll suave. -->
-    <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
     <script>
       (function () {
         "use strict";
@@ -850,16 +850,20 @@
            Fica desligado para quem pede menos movimento; nesse caso o
            navegador cuida da rolagem normalmente. */
         var lenis = null;
+        /* Easing padrão do Lenis (exponencial de saída), escrita à mão pra
+           poder ser reaproveitada no clique em âncora — assim a roda do mouse
+           e o menu desaceleram do mesmo jeito. */
+        var suavizacao = function (t) {
+          return Math.min(1, 1.001 - Math.pow(2, -10 * t));
+        };
         if (!semMovimento && typeof Lenis !== "undefined") {
-          /* duration: quanto tempo a rolagem leva pra assentar depois de
-             cada giro da roda. Estava em 1.1s e, com a easing padrão do
-             Lenis (que desacelera bastante no fim), um giro só parecia
-             travado: a página ainda estava terminando de descer quando já
-             dava vontade de girar de novo. 0.6s mantém o suave sem o
-             arrasto. wheelMultiplier > 1 cuida do outro lado da queixa:
-             no padrão (1) um giro anda pouca coisa, então era preciso
-             girar várias vezes pra sair do lugar. */
-          lenis = new Lenis({ duration: 0.6, wheelMultiplier: 1.2, smoothWheel: true });
+          lenis = new Lenis({
+            autoRaf: false,
+            duration: 1.4,
+            easing: suavizacao,
+            smoothWheel: true,
+            wheelMultiplier: 1,
+          });
           (function animar(t) {
             lenis.raf(t);
             requestAnimationFrame(animar);
@@ -877,10 +881,7 @@
           var header = document.getElementById("site-header");
           var alturaHeader = header ? header.getBoundingClientRect().height : 0;
           var topo = el.getBoundingClientRect().top + window.scrollY - alturaHeader - 3;
-          /* A âncora fica no ritmo antigo: aqui o salto costuma ser de
-             seções inteiras, e fazer isso em 0.6s vira um corte seco. A
-             duração curta é só pra roda do mouse. */
-          if (lenis) lenis.scrollTo(topo, { duration: 1.1 });
+          if (lenis) lenis.scrollTo(topo, { duration: 1.1, easing: suavizacao });
           else window.scrollTo({ top: topo, behavior: semMovimento ? "auto" : "smooth" });
         }
 
