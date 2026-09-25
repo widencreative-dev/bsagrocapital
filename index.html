@@ -748,7 +748,10 @@
                       </div>
                       <div>
                         <label for="telefone" class="form-label">WhatsApp <span aria-hidden="true">*</span></label>
-                        <input type="tel" id="telefone" name="telefone" required autocomplete="tel" pattern="^[0-9\(\)+\-\s]{8,20}$" class="form-input" placeholder="Insira seu WhatsApp" />
+                        <!-- maxlength 14 = os 11 dígitos (2 do DDD + 9) mais o
+                             "(", ")" e o espaço que a máscara insere. O limite
+                             real de 11 dígitos é aplicado no JS. -->
+                        <input type="tel" id="telefone" name="telefone" required autocomplete="tel" inputmode="numeric" maxlength="14" pattern="^[0-9\(\)+\-\s]{8,14}$" class="form-input" placeholder="DDD+WhatsApp" />
                         <p class="field-error" role="alert"></p>
                       </div>
                       <div>
@@ -1184,6 +1187,44 @@
               validarCampo(campo);
             });
           });
+
+          /* ---- Máscara do WhatsApp -----------------------------------------
+             Formata enquanto digita: o DDD entra entre parênteses e o resto do
+             número vem depois. Só os dígitos contam pro limite de 11 (2 do DDD
+             + 9) — parênteses e espaço são enfeite, e é por isso que o
+             maxlength do HTML é 14 e não 11. Sem JS o campo continua aceitando
+             o número digitado à mão (o pattern aceita os dois formatos). */
+          function formatarTelefone(valor) {
+            var digitos = valor.replace(/\D/g, "").slice(0, 11);
+            if (digitos.length <= 2) return digitos ? "(" + digitos : "";
+            return "(" + digitos.slice(0, 2) + ") " + digitos.slice(2);
+          }
+
+          var campoTelefone = form.querySelector('input[type="tel"]');
+          if (campoTelefone) {
+            campoTelefone.addEventListener("input", function () {
+              // Quantos dígitos havia antes do cursor: é essa contagem, e não a
+              // posição em caracteres, que sobrevive à reformatação.
+              var digitosAntesDoCursor = campoTelefone.value.slice(0, campoTelefone.selectionStart || 0).replace(/\D/g, "").length;
+              campoTelefone.value = formatarTelefone(campoTelefone.value);
+
+              var pos = 0;
+              var vistos = 0;
+              while (pos < campoTelefone.value.length && vistos < digitosAntesDoCursor) {
+                if (/\d/.test(campoTelefone.value.charAt(pos))) vistos++;
+                pos++;
+              }
+              // Pula a pontuação que vier logo depois (o ") " do DDD), senão o
+              // próximo dígito digitado entraria antes dela.
+              while (pos < campoTelefone.value.length && !/\d/.test(campoTelefone.value.charAt(pos))) pos++;
+              try {
+                campoTelefone.setSelectionRange(pos, pos);
+              } catch (e) {
+                /* input[type=tel] aceita seleção em todo navegador atual; se
+                   algum recusar, a máscara ainda funciona com o cursor no fim. */
+              }
+            });
+          }
 
           /* ---- Formulário em duas etapas -----------------------------------
              Etapa 1 (Sobre a operação) vem antes de Etapa 2 (Seus dados). O
