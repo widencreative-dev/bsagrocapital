@@ -1330,6 +1330,7 @@
             mostrarStatus("Enviando solicitação...", "info");
             var enviar = form.querySelector('button[type="submit"]');
             if (enviar) enviar.disabled = true;
+            var redirecionando = false;
 
             fetch(form.action, {
               method: "POST",
@@ -1342,9 +1343,17 @@
                 // form.reset() só reverte o valor dos campos — a etapa visível
                 // (controlada por `hidden` em divs, não em controles de
                 // formulário) não muda por conta própria. Volta pra etapa 1
-                // pra deixar tudo pronto caso a pessoa preencha de novo.
+                // pra deixar tudo pronto caso a pessoa volte pra cá pelo
+                // botão "voltar" do navegador.
                 if (mostrarPasso) mostrarPasso(1);
-                mostrarStatus("Solicitação enviada com sucesso. Em breve entraremos em contato.", "ok");
+                // A confirmação agora é a página de obrigado, não a mensagem
+                // embaixo do formulário. O status de "redirecionando" cobre o
+                // intervalo até a nova página pintar, e `assign` (em vez de
+                // `replace`) mantém o site no histórico, pra o "voltar"
+                // funcionar como a pessoa espera.
+                redirecionando = true;
+                mostrarStatus("Solicitação enviada. Redirecionando...", "ok");
+                window.location.assign("obrigado.html");
               })
               .catch(function () {
                 mostrarStatus(
@@ -1353,7 +1362,10 @@
                 );
               })
               .then(function () {
-                if (enviar) enviar.disabled = false;
+                // Enquanto a navegação acontece o botão fica desabilitado de
+                // propósito: reabilitar aqui abriria uma janela de alguns
+                // instantes em que dá pra enviar o formulário de novo.
+                if (enviar && !redirecionando) enviar.disabled = false;
               });
           });
         }
