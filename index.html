@@ -534,37 +534,22 @@
                 <div class="mt-6"><a href="#solicitar-analise" class="cta-btn cta-btn--dark cta-btn--icon"><span class="cta-btn__text">Falar com um especialista</span><span class="cta-btn__hover" aria-hidden="true"><span>Falar com um especialista</span><svg viewBox="0 0 24 24" focusable="false"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></a></div>
               </div>
 
-              <!-- CARTÃO ÚNICO do Caio Afiune, sócio e embaixador. Antes eram
-                   dois cartões lado a lado (o retrato dele, 4/5, e o da frase
-                   de confiança com o círculo) e viraram um só, a pedido do
-                   cliente: a foto em paisagem ocupa a largura inteira do
-                   cartão e a frase vem logo abaixo, no mesmo fundo olive-50
-                   que o cartão da frase já tinha. O círculo de contorno
-                   continua atrás do texto, agora recortado pelo
-                   overflow-hidden do próprio cartão.
-                   O <figure> é o bloco da foto (e não o cartão inteiro) porque
-                   o <figcaption> precisa ser filho direto do <figure>, e aqui
-                   ele é a faixa de vidro sobreposta à imagem (.time-legenda,
-                   seção 9c do CSS) — a mesma dos cartões da faixa abaixo.
+              <!-- CARTÃO DO CAIO AFIUNE, sócio e embaixador. Já foram dois
+                   cartões lado a lado (o retrato dele em 4/5 e outro com a
+                   frase "Um time em que você pode confiar", sobre um círculo
+                   de contorno); viraram um só e, depois, a frase saiu a pedido
+                   do cliente. Sobrou a foto em paisagem com a faixa de vidro
+                   de nome e cargo no pé (.time-legenda, seção 9c do CSS), a
+                   mesma dos cartões da faixa abaixo.
                    É por isso que o Caio não aparece naquela faixa: a presença
                    dele nesta seção é este cartão, ao lado do título. -->
-              <div class="revelar revelar--right overflow-hidden rounded-[20px] border border-graphite-900/10 bg-olive-50">
-                <figure class="relative aspect-[4/3] overflow-hidden bg-olive-100">
-                  <img src="assets/img/time/caio-afiune-lavoura.webp" alt="Retrato de Caio Afiune, sócio e embaixador da BS Agro Capital, de braços cruzados em uma lavoura" width="1200" height="896" loading="lazy" decoding="async" class="h-full w-full object-cover" />
-                  <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
-                    <p class="font-display text-base font-semibold leading-snug text-graphite-900">Caio Afiune</p>
-                    <p class="mt-0.5 text-sm leading-snug text-graphite-700">Sócio e embaixador</p>
-                  </figcaption>
-                </figure>
-
-                <div class="relative overflow-hidden p-8 text-center sm:p-10">
-                  <span class="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full border border-olive-300" aria-hidden="true"></span>
-                  <div class="relative">
-                    <p class="font-display text-xl font-semibold leading-snug text-graphite-900 sm:text-2xl">Um time em que você pode confiar</p>
-                    <p class="mt-3 text-sm leading-relaxed text-graphite-600">Experiência no agro e no mercado financeiro, do diagnóstico à execução.</p>
-                  </div>
-                </div>
-              </div>
+              <figure class="revelar revelar--right relative aspect-[4/3] overflow-hidden rounded-[20px] border border-graphite-900/10 bg-olive-100">
+                <img src="assets/img/time/caio-afiune-lavoura.webp" alt="Retrato de Caio Afiune, sócio e embaixador da BS Agro Capital, de braços cruzados em uma lavoura" width="1200" height="896" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                  <p class="font-display text-base font-semibold leading-snug text-graphite-900">Caio Afiune</p>
+                  <p class="mt-0.5 text-sm leading-snug text-graphite-700">Sócio e embaixador</p>
+                </figcaption>
+              </figure>
             </div>
 
             <!-- Faixa de retratos em loop contínuo, no lugar da grade de duas
