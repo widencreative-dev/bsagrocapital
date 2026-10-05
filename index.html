@@ -53,10 +53,10 @@
         "taxID": "66.308.795/0001-08",
         "address": {
           "@type": "PostalAddress",
-          "streetAddress": "Av. 136, 960 - Setor Marista",
-          "addressLocality": "Goiânia",
+          "streetAddress": "Av. Comercial, Qd. 27, Lt. 03 - Parque Brasília 2ª Etapa",
+          "addressLocality": "Anápolis",
           "addressRegion": "GO",
-          "postalCode": "74180-140",
+          "postalCode": "75093-715",
           "addressCountry": "BR"
         },
         "areaServed": "BR",
@@ -180,7 +180,7 @@
              dele. -->
         <div class="hero-chip revelar absolute hidden lg:block" style="top: 54%; right: 4rem; animation-delay: -1.2s;">
           <p class="hero-chip__title">Caio Afiune</p>
-          <p class="hero-chip__label">Embaixador da BS Agro</p>
+          <p class="hero-chip__label">Sócio e embaixador da BS Agro</p>
         </div>
         <div class="hero-chip revelar absolute hidden lg:block" style="top: 71%; left: 62%; animation-delay: -0.6s;">
           <p class="hero-chip__title">Conhecimento do agro</p>
@@ -235,8 +235,21 @@
                   <div class="mt-8"><a href="#solicitar-analise" class="cta-btn cta-btn--icon"><span class="cta-btn__text">Solicitar análise de crédito</span><span class="cta-btn__hover" aria-hidden="true"><span>Solicitar análise de crédito</span><svg viewBox="0 0 24 24" focusable="false"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></a></div>
                 </div>
               </div>
+              <!-- Nome e cargo do Caio no pé do cartão, à esquerda do recorte
+                   dele (ver .solucoes-featured__assinatura no CSS). Fora do
+                   .solucoes-featured__content de propósito: o conteúdo mede a
+                   altura do texto, e a legenda precisa se ancorar na base do
+                   CARTÃO, não na do texto. Numa linha só e em corpo pequeno, a
+                   pedido do cliente. Como o alt do recorte já identifica o
+                   Caio, aqui ela é só visual — aria-hidden pra não repetir o
+                   nome no leitor de tela. -->
+              <p class="solucoes-featured__assinatura hidden lg:block" aria-hidden="true">
+                <span class="font-display text-xs font-semibold text-paper">Caio Afiune</span>
+                <span class="mx-1 text-paper/40">·</span>
+                <span class="text-[11px] text-paper/70">Sócio e embaixador da BS Agro</span>
+              </p>
             </div>
-            <img src="assets/img/solucoes/produtoras-rurais-equipe-bs-agro-capital.webp" alt="Duas produtoras rurais sorrindo, de braços cruzados, em uma lavoura" width="1080" height="1304" loading="lazy" decoding="async" class="solucoes-featured__portrait" />
+            <img src="assets/img/solucoes/caio-afiune-socio-embaixador-recorte.webp" alt="Caio Afiune, sócio e embaixador da BS Agro Capital" width="640" height="914" loading="lazy" decoding="async" class="solucoes-featured__portrait solucoes-featured__portrait--caio" />
           </div>
 
           <div class="solucoes-cards mt-12 revelar">
@@ -285,7 +298,7 @@
           <div class="atuacao-cards mt-8 grid gap-8 revelar lg:grid-cols-2">
             <div class="atuacao-card flex flex-col overflow-hidden rounded-[20px] bg-paper shadow-soft">
               <div class="aspect-[16/9] flex-none overflow-hidden">
-                <img src="assets/img/atuacao/aperto-maos-negocio-fechado-garantia-real.webp" alt="Aperto de mãos entre dois parceiros em uma lavoura, fechando negócio" width="1080" height="1080" loading="lazy" decoding="async" class="h-full w-full object-cover" style="object-position: 50% 30%" />
+                <img src="assets/img/atuacao/produtor-rural-tablet-lavoura-garantia-real.webp" alt="Produtor rural sorrindo com tablet nas mãos em meio à lavoura" width="1500" height="1000" loading="lazy" decoding="async" class="h-full w-full object-cover" />
               </div>
               <div class="flex flex-1 flex-col p-8 lg:p-10">
                 <p class="mb-3 text-sm font-medium uppercase tracking-[0.14em] text-olive-800">Garantia real</p>
@@ -366,57 +379,51 @@
       </section>
 
       <!-- COMO FUNCIONA -->
-      <section id="como-funciona" class="bg-mesh-light px-6 pt-6 pb-10 lg:px-8 lg:pt-8 lg:pb-14">
+      <section id="como-funciona" class="bg-mesh-olive text-paper px-6 pt-6 pb-10 lg:px-8 lg:pt-8 lg:pb-14">
         <div class="mx-auto max-w-7xl">
           <div class="section-divider revelar mb-8 lg:mb-10" aria-hidden="true"><span class="section-divider__plus">+</span></div>
           <div class="revelar mx-auto max-w-2xl text-center">
-            <p class="text-sm font-medium uppercase tracking-[0.14em] text-olive-800">Como funciona</p>
-            <h2 class="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight text-graphite-900 sm:text-4xl lg:text-[44px]">Um processo técnico, do diagnóstico à execução</h2>
-            <p class="lead mt-4 text-lg leading-relaxed text-graphite-600">Do diagnóstico inicial até a efetivação, cada etapa é construída a partir da realidade financeira e patrimonial apresentada pelo cliente.</p>
+            <p class="text-sm font-medium uppercase tracking-[0.14em] text-gold-400">Como funciona</p>
+            <h2 class="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight text-paper sm:text-4xl lg:text-[44px]">Um processo técnico, do diagnóstico à execução</h2>
+            <p class="lead mt-4 text-lg leading-relaxed text-paper/75">Do diagnóstico inicial até a efetivação, cada etapa é construída a partir da realidade financeira e patrimonial apresentada pelo cliente.</p>
           </div>
           <div class="relative mt-10 lg:mt-12">
-            <!-- left-0/right-0 em vez de -left-12/-right-12: assim posicionados,
-                 estes dois brilhos eram a única coisa que estourava a largura
-                 da página — 24px de cada lado no celular e 16px até ~1376px,
-                 que é a largura a partir da qual o contêiner (max-w-7xl) tem
-                 folga lateral suficiente pro recuo negativo caber. Quem
-                 segurava isso era o overflow-x:hidden de html/body, que
-                 esconde o sintoma em vez de resolver. São círculos de 288px
-                 com blur-3xl a 30% de opacidade: deslocar 48px pra dentro não
-                 muda nada visível, e a página deixa de depender da trava. -->
-            <div class="pointer-events-none absolute left-0 -top-16 h-72 w-72 rounded-full bg-gold-400/30 blur-3xl" aria-hidden="true"></div>
-            <div class="pointer-events-none absolute right-0 bottom-0 h-72 w-72 rounded-full bg-olive-400/30 blur-3xl" aria-hidden="true"></div>
+            <!-- Aqui existiam dois brilhos decorativos (círculos de 288px com
+                 blur-3xl, um dourado no topo à esquerda e um verde embaixo à
+                 direita). Removidos a pedido: sobre o verde da seção liam
+                 como manchas de luz. O fundo da fatia continua sendo o
+                 .bg-mesh-olive da <section>. -->
             <ol class="relative grid gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-              <li class="revelar relative flex flex-col items-center text-left lg:after:absolute lg:after:left-1/2 lg:after:top-5 lg:after:h-px lg:after:w-[calc(100%+2rem)] lg:after:bg-graphite-900/20 lg:after:content-['']">
-                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-olive-800 text-sm font-semibold text-paper">01</span>
-                <div class="glass-card mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-olive-900/10 text-olive-800"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <circle cx="11.5" cy="14.5" r="2.5" /> <path d="M13.3 16.3 15 18" /></svg></span>
-                  <h3 class="mt-4 text-lg font-semibold leading-snug text-graphite-900">Diagnóstico da situação financeira e patrimonial</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Levantamento da situação financeira e patrimonial do cliente, incluindo passivos existentes, patrimônio disponível e contexto da operação, como base para qualquer estruturação.</p>
+              <li class="revelar relative flex flex-col items-center text-left lg:after:absolute lg:after:left-1/2 lg:after:top-5 lg:after:h-px lg:after:w-[calc(100%+2rem)] lg:after:bg-paper/20 lg:after:content-['']">
+                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-gold-500 text-sm font-semibold text-olive-950">01</span>
+                <div class="glass-card--dark mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-paper/10 text-gold-400"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <circle cx="11.5" cy="14.5" r="2.5" /> <path d="M13.3 16.3 15 18" /></svg></span>
+                  <h3 class="mt-4 text-lg font-semibold leading-snug text-paper">Diagnóstico da situação financeira e patrimonial</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Levantamento da situação financeira e patrimonial do cliente, incluindo passivos existentes, patrimônio disponível e contexto da operação, como base para qualquer estruturação.</p>
                 </div>
               </li>
-              <li class="revelar relative flex flex-col items-center text-left lg:after:absolute lg:after:left-1/2 lg:after:top-5 lg:after:h-px lg:after:w-[calc(100%+2rem)] lg:after:bg-graphite-900/20 lg:after:content-['']">
-                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-olive-800 text-sm font-semibold text-paper">02</span>
-                <div class="glass-card mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-olive-900/10 text-olive-800"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 8 6-3-6-3v10" /> <path d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12" /> <path d="m6.49 12.85 11.02 6.3" /> <path d="M17.51 12.85 6.5 19.15" /></svg></span>
-                  <h3 class="mt-4 text-lg font-semibold leading-snug text-graphite-900">Análise de capacidade produtiva e alternativas de garantia</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Avaliação da capacidade produtiva envolvida e dos bens que podem ser oferecidos em garantia, rural ou urbano, para identificar quais alternativas de capital são compatíveis com a operação.</p>
+              <li class="revelar relative flex flex-col items-center text-left lg:after:absolute lg:after:left-1/2 lg:after:top-5 lg:after:h-px lg:after:w-[calc(100%+2rem)] lg:after:bg-paper/20 lg:after:content-['']">
+                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-gold-500 text-sm font-semibold text-olive-950">02</span>
+                <div class="glass-card--dark mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-paper/10 text-gold-400"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 8 6-3-6-3v10" /> <path d="m8 11.99-5.5 3.14a1 1 0 0 0 0 1.74l8.5 4.86a2 2 0 0 0 2 0l8.5-4.86a1 1 0 0 0 0-1.74L16 12" /> <path d="m6.49 12.85 11.02 6.3" /> <path d="M17.51 12.85 6.5 19.15" /></svg></span>
+                  <h3 class="mt-4 text-lg font-semibold leading-snug text-paper">Análise de capacidade produtiva e alternativas de garantia</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Avaliação da capacidade produtiva envolvida e dos bens que podem ser oferecidos em garantia, rural ou urbano, para identificar quais alternativas de capital são compatíveis com a operação.</p>
                 </div>
               </li>
-              <li class="revelar relative flex flex-col items-center text-left lg:after:absolute lg:after:left-1/2 lg:after:top-5 lg:after:h-px lg:after:w-[calc(100%+2rem)] lg:after:bg-graphite-900/20 lg:after:content-['']">
-                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-olive-800 text-sm font-semibold text-paper">03</span>
-                <div class="glass-card mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-olive-900/10 text-olive-800"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></svg></span>
-                  <h3 class="mt-4 text-lg font-semibold leading-snug text-graphite-900">Estruturação da operação e conexão com fontes de capital</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Construção da estrutura financeira mais adequada ao caso e conexão com as fontes de capital disponíveis no mercado, alinhando a operação à realidade patrimonial e produtiva do cliente.</p>
+              <li class="revelar relative flex flex-col items-center text-left lg:after:absolute lg:after:left-1/2 lg:after:top-5 lg:after:h-px lg:after:w-[calc(100%+2rem)] lg:after:bg-paper/20 lg:after:content-['']">
+                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-gold-500 text-sm font-semibold text-olive-950">03</span>
+                <div class="glass-card--dark mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-paper/10 text-gold-400"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></svg></span>
+                  <h3 class="mt-4 text-lg font-semibold leading-snug text-paper">Estruturação da operação e conexão com fontes de capital</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Construção da estrutura financeira mais adequada ao caso e conexão com as fontes de capital disponíveis no mercado, alinhando a operação à realidade patrimonial e produtiva do cliente.</p>
                 </div>
               </li>
               <li class="revelar relative flex flex-col items-center text-left">
-                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-olive-800 text-sm font-semibold text-paper">04</span>
-                <div class="glass-card mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
-                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-olive-900/10 text-olive-800"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /></svg></span>
-                  <h3 class="mt-4 text-lg font-semibold leading-snug text-graphite-900">Acompanhamento da execução</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Acompanhamento das etapas necessárias até a efetivação da operação, mantendo o cliente informado sobre o andamento e as definições ao longo do processo.</p>
+                <span class="relative z-10 flex h-10 w-10 flex-none items-center justify-center rounded-full bg-gold-500 text-sm font-semibold text-olive-950">04</span>
+                <div class="glass-card--dark mt-5 flex w-full flex-1 flex-col p-6 transition-transform duration-300 hover:-translate-y-1 lg:p-7">
+                  <span class="flex h-10 w-10 items-center justify-center rounded-full bg-paper/10 text-gold-400"><svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /></svg></span>
+                  <h3 class="mt-4 text-lg font-semibold leading-snug text-paper">Acompanhamento da execução</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Acompanhamento das etapas necessárias até a efetivação da operação, mantendo o cliente informado sobre o andamento e as definições ao longo do processo.</p>
                 </div>
               </li>
             </ol>
@@ -434,27 +441,37 @@
         <div class="mx-auto max-w-7xl">
           <div class="section-divider revelar mb-8 lg:mb-10" aria-hidden="true"><span class="section-divider__plus">+</span></div>
 
-          <div class="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
-            <div class="revelar max-w-2xl">
-              <p class="text-sm font-medium uppercase tracking-[0.14em] text-olive-800">Quem somos</p>
-              <h2 class="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight text-graphite-900 sm:text-4xl lg:text-[44px]">Como surgiu a BS Agro Capital</h2>
-              <div class="prose-institucional mt-4 text-graphite-600">
-                <p>A BS Agro Capital é uma empresa familiar que carrega sua origem no próprio nome: Brandão Salles. Nasceu da trajetória de Évellyn Brandão, que construiu quase uma década de experiência no mercado financeiro, sendo mais de oito anos no Itaú Unibanco, entre relacionamento, negócios e crédito, com certificação CPA-20, participação em comitês de crédito e na estruturação de mais de R$ 200 milhões em operações.</p>
-                <p>Ao assumir a posição de Gerente Regional Agro, Évellyn deixou Minas Gerais com a família rumo a Goiás, um dos principais polos do agronegócio brasileiro. Na prática com produtores rurais e empresas do setor, viu de perto a dificuldade de acessar crédito estruturado. Dessa percepção, somada à paixão da família Brandão Salles pelo agro, nasceu a BS Agro Capital: conhecimento técnico do mercado financeiro e uma rede estratégica com cooperativas de crédito e fundos de investimento, a serviço de quem produz.</p>
+          <!-- "Quem somos" montado exatamente como o cartão em destaque de
+               #solucoes ("Crédito Estruturado via Fundos de Investimento"):
+               .solucoes-featured (foto de fundo + véu oliva, cantos de 20px),
+               largura cheia do container, p-10 lg:p-14 e o conteúdo preso em
+               max-w-3xl. Sem altura mínima, então a altura é só a do texto
+               mais o padding. Sobre fundo escuro, o rótulo vira text-gold-400
+               e o corpo text-paper/75.
+               O retrato recortado das sócias é irmão do cartão, não filho,
+               pela mesma razão de lá: o cartão tem overflow: hidden pros
+               cantos arredondados e um filho não conseguiria estourar esse
+               recorte. A variante --sobre é mais alta que a de #solucoes de
+               propósito — ali o retrato cabe dentro da altura do cartão, aqui
+               ele precisa passar um pouco da borda de cima, que foi o pedido.
+               A foto quadrada dos sócios que ficava ao lado do texto saiu
+               quando o bloco virou cartão. -->
+          <div class="relative revelar">
+            <div class="solucoes-featured p-10 lg:p-14">
+              <img src="assets/img/solucoes/vista-lavoura-fileiras-agronegocio.webp" alt="" aria-hidden="true" width="1024" height="395" loading="lazy" decoding="async" class="solucoes-featured__img" />
+              <div class="solucoes-featured__overlay" aria-hidden="true"></div>
+              <div class="solucoes-featured__content">
+                <div class="max-w-3xl">
+                  <p class="text-sm font-medium uppercase tracking-[0.14em] text-gold-400">Quem somos</p>
+                  <h2 class="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight sm:text-4xl lg:text-[44px]">Como surgiu a BS Agro Capital</h2>
+                  <div class="prose-institucional mt-5 text-lg leading-relaxed text-paper/75">
+                    <p>A BS Agro Capital é uma empresa familiar que carrega sua origem no próprio nome: Brandão Salles. Nasceu da trajetória de Évellyn Brandão, que construiu quase uma década de experiência no mercado financeiro, sendo mais de oito anos no Itaú Unibanco, entre relacionamento, negócios e crédito, com certificação CPA-20, participação em comitês de crédito e na estruturação de mais de R$ 500 milhões em operações.</p>
+                    <p>Ao assumir a posição de Gerente Regional Agro, Évellyn deixou Minas Gerais com a família rumo a Goiás, um dos principais polos do agronegócio brasileiro. Na prática com produtores rurais e empresas do setor, viu de perto a dificuldade de acessar crédito estruturado. Dessa percepção, somada à paixão da família Brandão Salles pelo agro, nasceu a BS Agro Capital: conhecimento técnico do mercado financeiro e uma rede estratégica com cooperativas de crédito e fundos de investimento, a serviço de quem produz.</p>
+                  </div>
+                </div>
               </div>
             </div>
-
-            <!-- Foto dos sócios enviada especificamente pra esta seção (não é
-                 mais a reaproveitada de #solucoes, nem o recorte com fundo
-                 removido de antes — essa nova é uma foto comum, opaca,
-                 quadrada, com os quatro de corpo inteiro). Por já mostrar o
-                 grupo inteiro dentro do próprio quadrado, o retrato flutuante
-                 que existia aqui (a versão recortada, ver histórico) foi
-                 removido: mostrar as mesmas quatro pessoas duas vezes na
-                 mesma seção lia como repetição, não como destaque. -->
-            <div class="revelar aspect-square overflow-hidden rounded-[28px]">
-              <img src="assets/img/sobre/socios-fundadores-bs-agro-capital-lavoura.webp" alt="Os quatro sócios da BS Agro Capital de mãos dadas em uma lavoura" width="1080" height="1080" loading="lazy" decoding="async" class="h-full w-full object-cover" />
-            </div>
+            <img src="assets/img/solucoes/produtoras-rurais-equipe-bs-agro-capital.webp" alt="" aria-hidden="true" width="1080" height="1304" loading="lazy" decoding="async" class="solucoes-featured__portrait solucoes-featured__portrait--sobre" />
           </div>
 
           <!-- Indicadores sobre a TRAJETÓRIA PROFISSIONAL da sócia-fundadora
@@ -494,8 +511,202 @@
                 <p class="mt-4 text-graphite-600">Atendidos ao longo da carreira</p>
               </div>
               <div class="revelar md:text-center">
-                <p class="stat-numero font-display uppercase font-semibold text-gold-800" data-contador>+de R$ 200m</p>
+                <p class="stat-numero font-display uppercase font-semibold text-gold-800" data-contador>+de R$ 500m</p>
                 <p class="mt-4 text-graphite-600">Em operações de crédito ao longo da carreira</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- NOSSO TIME: bloco dentro de #sobre, separado por filete — mesma
+               lógica dos outros temas próximos reunidos aqui (ver o comentário
+               de abertura da seção). Estrutura vinda da referência enviada pelo
+               cliente: coluna de texto + CTA à esquerda e, à direita, uma foto
+               larga ao lado de um cartão com a frase de confiança; embaixo, a
+               fileira de retratos. A referência mostra só 3 retratos e sem
+               legenda — aqui são 8 pessoas, então a fileira virou uma grade de
+               largura total com nome e cargo sob cada foto. -->
+          <div id="time" class="mt-10 border-t border-graphite-900/15 pt-10 lg:mt-12 lg:pt-12">
+            <div class="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-16">
+              <div class="revelar max-w-xl">
+                <p class="text-sm font-medium uppercase tracking-[0.14em] text-olive-800">Nosso time</p>
+                <h2 class="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight text-graphite-900 sm:text-4xl lg:text-[44px]">As pessoas por trás de cada operação</h2>
+                <p class="lead mt-4 text-lg leading-relaxed text-graphite-600">Crédito estruturado não se resolve num formulário: se resolve com gente que entende a rotina do produtor e a lógica de quem concede o crédito. É esse time que acompanha cada operação, do diagnóstico à execução.</p>
+                <div class="mt-6"><a href="#solicitar-analise" class="cta-btn cta-btn--dark cta-btn--icon"><span class="cta-btn__text">Falar com um especialista</span><span class="cta-btn__hover" aria-hidden="true"><span>Falar com um especialista</span><svg viewBox="0 0 24 24" focusable="false"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></a></div>
+              </div>
+
+              <!-- CARTÃO ÚNICO do Caio Afiune, sócio e embaixador. Antes eram
+                   dois cartões lado a lado (o retrato dele, 4/5, e o da frase
+                   de confiança com o círculo) e viraram um só, a pedido do
+                   cliente: a foto em paisagem ocupa a largura inteira do
+                   cartão e a frase vem logo abaixo, no mesmo fundo olive-50
+                   que o cartão da frase já tinha. O círculo de contorno
+                   continua atrás do texto, agora recortado pelo
+                   overflow-hidden do próprio cartão.
+                   O <figure> é o bloco da foto (e não o cartão inteiro) porque
+                   o <figcaption> precisa ser filho direto do <figure>, e aqui
+                   ele é a faixa de vidro sobreposta à imagem (.time-legenda,
+                   seção 9c do CSS) — a mesma dos cartões da faixa abaixo.
+                   É por isso que o Caio não aparece naquela faixa: a presença
+                   dele nesta seção é este cartão, ao lado do título. -->
+              <div class="revelar revelar--right overflow-hidden rounded-[20px] border border-graphite-900/10 bg-olive-50">
+                <figure class="relative aspect-[4/3] overflow-hidden bg-olive-100">
+                  <img src="assets/img/time/caio-afiune-lavoura.webp" alt="Retrato de Caio Afiune, sócio e embaixador da BS Agro Capital, de braços cruzados em uma lavoura" width="1200" height="896" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                  <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                    <p class="font-display text-base font-semibold leading-snug text-graphite-900">Caio Afiune</p>
+                    <p class="mt-0.5 text-sm leading-snug text-graphite-700">Sócio e embaixador</p>
+                  </figcaption>
+                </figure>
+
+                <div class="relative overflow-hidden p-8 text-center sm:p-10">
+                  <span class="pointer-events-none absolute left-1/2 top-1/2 h-80 w-80 -translate-x-1/2 -translate-y-1/2 rounded-full border border-olive-300" aria-hidden="true"></span>
+                  <div class="relative">
+                    <p class="font-display text-xl font-semibold leading-snug text-graphite-900 sm:text-2xl">Um time em que você pode confiar</p>
+                    <p class="mt-3 text-sm leading-relaxed text-graphite-600">Experiência no agro e no mercado financeiro, do diagnóstico à execução.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Faixa de retratos em loop contínuo, no lugar da grade de duas
+                 fileiras que existia aqui: com 8 pessoas a grade dobrava a
+                 altura do bloco, e o pedido é que a seção fique só do tamanho
+                 de uma fileira e que os cartões passem sozinhos. Mecanismo e
+                 medidas em .time-marquee (seção 9g do CSS) — é o mesmo do
+                 carrossel de parceiros, com a lista duplicada uma vez e a
+                 segunda metade em aria-hidden para o leitor de tela ler os
+                 sete nomes uma vez só. AO EDITAR: as duas metades precisam
+                 continuar idênticas, senão a emenda do loop salta.
+
+                 Ordem alfabética pelo primeiro nome. São sete, e não oito:
+                 Caio Afiune não entra na faixa porque a presença dele nesta
+                 seção é o cartão grande ao lado do título, acima.
+
+                 Nome e cargo ficam numa faixa de vidro no pé do cartão (ver
+                 .time-legenda, seção 9c do CSS).
+                 FOTOS: as sete pessoas da faixa têm retrato real em
+                 assets/img/time/ (WebP de 800px de largura, convertidos dos
+                 arquivos enviados pelo cliente). Não sobrou ninguém com as
+                 iniciais no lugar do rosto.
+                 Para trocar um retrato, substituir o <img> NAS DUAS METADES,
+                 mantendo o <figure>:
+                 <img src="assets/img/time/nome-sobrenome.webp" alt="Retrato de Nome Sobrenome" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                 Na metade duplicada o alt vai vazio (alt=""), porque aquele
+                 bloco inteiro é aria-hidden.
+                 Os arquivos chegaram em dois formatos e nenhum bate exatamente
+                 com o recorte 4/5 do cartão: Évellyn, Paulo Henrique e
+                 Priscila são quadrados (800x800) e perdem um pouco das
+                 laterais; os outros quatro são 3:4 (800x1071) e perdem um
+                 pouco de cima e de baixo. Em todos
+                 o rosto continua centralizado, mas vale conferir isso a cada
+                 retrato novo — o width/height da tag precisa bater com o
+                 arquivo, senão o navegador reserva o espaço errado e a página
+                 salta durante o carregamento. -->
+            <div class="time-marquee revelar mt-10 lg:mt-12">
+              <div class="time-marquee__track">
+                <div class="flex">
+                  <figure class="time-marquee__item">
+                    <img src="assets/img/time/alcaa-arantes.webp" alt="Retrato de Alcaã Arantes" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                    <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                      <p class="font-display text-base font-semibold leading-snug text-graphite-900">Alcaã Arantes</p>
+                      <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Relações Estratégicas</p>
+                    </figcaption>
+                  </figure>
+                  <figure class="time-marquee__item">
+                    <img src="assets/img/time/evellyn-brandao.webp" alt="Retrato de Évellyn Brandão" width="800" height="800" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                    <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                      <p class="font-display text-base font-semibold leading-snug text-graphite-900">Évellyn Brandão</p>
+                      <p class="mt-0.5 text-sm leading-snug text-graphite-700">CEO &amp; Fundadora</p>
+                    </figcaption>
+                  </figure>
+                  <figure class="time-marquee__item">
+                    <img src="assets/img/time/igor-santiago.webp" alt="Retrato de Igor Santiago" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                    <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                      <p class="font-display text-base font-semibold leading-snug text-graphite-900">Igor Santiago</p>
+                      <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Negócios | Crédito Agro</p>
+                    </figcaption>
+                  </figure>
+                  <figure class="time-marquee__item">
+                    <img src="assets/img/time/klinger-marques.webp" alt="Retrato de Klinger Marques" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                    <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                      <p class="font-display text-base font-semibold leading-snug text-graphite-900">Klinger Marques</p>
+                      <p class="mt-0.5 text-sm leading-snug text-graphite-700">Analista de Operações de Crédito</p>
+                    </figcaption>
+                  </figure>
+                  <figure class="time-marquee__item">
+                    <img src="assets/img/time/lucas-martins.webp" alt="Retrato de Lucas Martins" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                    <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                      <p class="font-display text-base font-semibold leading-snug text-graphite-900">Lucas Martins</p>
+                      <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Negócios | Crédito Agro</p>
+                    </figcaption>
+                  </figure>
+                  <figure class="time-marquee__item">
+                    <img src="assets/img/time/paulo-henrique.webp" alt="Retrato de Paulo Henrique" width="800" height="800" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                    <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                      <p class="font-display text-base font-semibold leading-snug text-graphite-900">Paulo Henrique</p>
+                      <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Negócios | Crédito Agro</p>
+                    </figcaption>
+                  </figure>
+                  <figure class="time-marquee__item">
+                    <img src="assets/img/time/priscila-salles.webp" alt="Retrato de Priscila Salles" width="800" height="800" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                    <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                      <p class="font-display text-base font-semibold leading-snug text-graphite-900">Priscila Salles</p>
+                      <p class="mt-0.5 text-sm leading-snug text-graphite-700">CEO &amp; Diretora de Operações</p>
+                    </figcaption>
+                  </figure>
+                </div>
+                <div class="contents" aria-hidden="true">
+                  <div class="flex">
+                    <figure class="time-marquee__item">
+                      <img src="assets/img/time/alcaa-arantes.webp" alt="" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                      <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                        <p class="font-display text-base font-semibold leading-snug text-graphite-900">Alcaã Arantes</p>
+                        <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Relações Estratégicas</p>
+                      </figcaption>
+                    </figure>
+                    <figure class="time-marquee__item">
+                      <img src="assets/img/time/evellyn-brandao.webp" alt="" width="800" height="800" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                      <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                        <p class="font-display text-base font-semibold leading-snug text-graphite-900">Évellyn Brandão</p>
+                        <p class="mt-0.5 text-sm leading-snug text-graphite-700">CEO &amp; Fundadora</p>
+                      </figcaption>
+                    </figure>
+                    <figure class="time-marquee__item">
+                      <img src="assets/img/time/igor-santiago.webp" alt="" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                      <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                        <p class="font-display text-base font-semibold leading-snug text-graphite-900">Igor Santiago</p>
+                        <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Negócios | Crédito Agro</p>
+                      </figcaption>
+                    </figure>
+                    <figure class="time-marquee__item">
+                      <img src="assets/img/time/klinger-marques.webp" alt="" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                      <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                        <p class="font-display text-base font-semibold leading-snug text-graphite-900">Klinger Marques</p>
+                        <p class="mt-0.5 text-sm leading-snug text-graphite-700">Analista de Operações de Crédito</p>
+                      </figcaption>
+                    </figure>
+                    <figure class="time-marquee__item">
+                      <img src="assets/img/time/lucas-martins.webp" alt="" width="800" height="1071" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                      <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                        <p class="font-display text-base font-semibold leading-snug text-graphite-900">Lucas Martins</p>
+                        <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Negócios | Crédito Agro</p>
+                      </figcaption>
+                    </figure>
+                    <figure class="time-marquee__item">
+                      <img src="assets/img/time/paulo-henrique.webp" alt="" width="800" height="800" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                      <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                        <p class="font-display text-base font-semibold leading-snug text-graphite-900">Paulo Henrique</p>
+                        <p class="mt-0.5 text-sm leading-snug text-graphite-700">Executivo de Negócios | Crédito Agro</p>
+                      </figcaption>
+                    </figure>
+                    <figure class="time-marquee__item">
+                      <img src="assets/img/time/priscila-salles.webp" alt="" width="800" height="800" loading="lazy" decoding="async" class="h-full w-full object-cover" />
+                      <figcaption class="time-legenda absolute inset-x-0 bottom-0 px-4 py-3">
+                        <p class="font-display text-base font-semibold leading-snug text-graphite-900">Priscila Salles</p>
+                        <p class="mt-0.5 text-sm leading-snug text-graphite-700">CEO &amp; Diretora de Operações</p>
+                      </figcaption>
+                    </figure>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -504,94 +715,94 @@
 
       <!-- PROPÓSITO & DIFERENCIAIS: dois grids de cartões que antes eram duas
            seções cheias, agora um bloco só com um filete entre eles. -->
-      <section id="proposito" class="bg-paper px-6 pt-6 pb-10 lg:px-8 lg:pt-8 lg:pb-14">
+      <section id="proposito" class="bg-mesh-olive text-paper px-6 pt-6 pb-10 lg:px-8 lg:pt-8 lg:pb-14">
         <div class="mx-auto max-w-7xl">
           <div class="section-divider revelar mb-8 lg:mb-10" aria-hidden="true"><span class="section-divider__plus">+</span></div>
           <!-- Estrutura pedida pelo cliente a partir de uma referência (dashboard
                escuro, badge + headline grande à esquerda, grid 2x2 de cartões à
-               direita): mantivemos o fundo claro do site (bg-paper), só
-               reaproveitando o LAYOUT. Os cartões continuam com o conteúdo real
+               direita): a seção virou uma fatia escura (bg-mesh-olive), agora
+               perto da referência também no tom, mas na paleta da marca. Os cartões continuam com o conteúdo real
                que já existia aqui (os 4 benefícios do Propósito) — a referência
                usava números tipo "500.000 usuários", mas isso não existe pra
                essa seção, então os cartões mostram ícone + título + descrição
                no lugar de ícone + número + variação percentual. -->
           <div class="grid gap-10 lg:grid-cols-2 lg:items-start lg:gap-16">
             <div class="revelar max-w-xl">
-              <p class="text-sm font-medium uppercase tracking-[0.14em] text-olive-800">Na prática</p>
-              <h2 class="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight text-graphite-900 sm:text-4xl lg:text-[44px]">O que a BS Agro Capital faz pelo seu negócio</h2>
-              <p class="lead mt-4 text-lg leading-relaxed text-graphite-600">Transformamos o seu patrimônio e a sua capacidade produtiva em crédito estruturado, pra você ter caixa pra operar, dívidas sob controle e fôlego pra seguir produzindo e crescendo.</p>
+              <p class="text-sm font-medium uppercase tracking-[0.14em] text-gold-400">Na prática</p>
+              <h2 class="mt-3 text-3xl font-semibold leading-[1.15] tracking-tight text-paper sm:text-4xl lg:text-[44px]">O que a BS Agro Capital faz pelo seu negócio</h2>
+              <p class="lead mt-4 text-lg leading-relaxed text-paper/75">Transformamos o seu patrimônio e a sua capacidade produtiva em crédito estruturado, pra você ter caixa pra operar, dívidas sob controle e fôlego pra seguir produzindo e crescendo.</p>
               <div class="mt-6"><a href="#solicitar-analise" class="cta-btn cta-btn--icon"><span class="cta-btn__text">Solicitar análise de crédito</span><span class="cta-btn__hover" aria-hidden="true"><span>Solicitar análise de crédito</span><svg viewBox="0 0 24 24" focusable="false"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></span></a></div>
             </div>
             <div class="grid gap-4 sm:grid-cols-2">
-              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-graphite-900/15 bg-paper p-6 shadow-soft">
-                <span class="text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48" /> <path d="M15 6h1v4" /> <path d="m6.134 14.768.866-.5 2 3.464" /> <circle cx="16" cy="8" r="6" /></svg></span>
+              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-paper/20 bg-paper/5 p-6 shadow-soft">
+                <span class="text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.744 17.736a6 6 0 1 1-7.48-7.48" /> <path d="M15 6h1v4" /> <path d="m6.134 14.768.866-.5 2 3.464" /> <circle cx="16" cy="8" r="6" /></svg></span>
                 <div>
-                  <h3 class="text-xl font-semibold leading-snug text-graphite-900">Caixa pra operar</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Transformamos seu patrimônio e sua capacidade produtiva em dinheiro em caixa pra tocar a safra ou o negócio.</p>
+                  <h3 class="text-xl font-semibold leading-snug text-paper">Caixa pra operar</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Transformamos seu patrimônio e sua capacidade produtiva em dinheiro em caixa pra tocar a safra ou o negócio.</p>
                 </div>
               </div>
-              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-graphite-900/15 bg-paper p-6 shadow-soft">
-                <span class="text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /> <path d="M8 16H3v5" /></svg></span>
+              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-paper/20 bg-paper/5 p-6 shadow-soft">
+                <span class="text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8" /> <path d="M21 3v5h-5" /> <path d="M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16" /> <path d="M8 16H3v5" /></svg></span>
                 <div>
-                  <h3 class="text-xl font-semibold leading-snug text-graphite-900">Dívidas sob controle</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Reorganizamos suas dívidas num formato que cabe no seu fluxo de caixa, sem sufocar a operação.</p>
+                  <h3 class="text-xl font-semibold leading-snug text-paper">Dívidas sob controle</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Reorganizamos suas dívidas num formato que cabe no seu fluxo de caixa, sem sufocar a operação.</p>
                 </div>
               </div>
-              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-graphite-900/15 bg-paper p-6 shadow-soft">
-                <span class="text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" /> <path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" /> <path d="M5 21h14" /></svg></span>
+              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-paper/20 bg-paper/5 p-6 shadow-soft">
+                <span class="text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 9.536V7a4 4 0 0 1 4-4h1.5a.5.5 0 0 1 .5.5V5a4 4 0 0 1-4 4 4 4 0 0 0-4 4c0 2 1 3 1 5a5 5 0 0 1-1 3" /> <path d="M4 9a5 5 0 0 1 8 4 5 5 0 0 1-8-4" /> <path d="M5 21h14" /></svg></span>
                 <div>
-                  <h3 class="text-xl font-semibold leading-snug text-graphite-900">Produção sem interrupção</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Estruturamos a operação pra você continuar plantando, colhendo e vendendo, mesmo em momentos mais difíceis.</p>
+                  <h3 class="text-xl font-semibold leading-snug text-paper">Produção sem interrupção</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Estruturamos a operação pra você continuar plantando, colhendo e vendendo, mesmo em momentos mais difíceis.</p>
                 </div>
               </div>
-              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-graphite-900/15 bg-paper p-6 shadow-soft">
-                <span class="text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6" /> <path d="m22 7-8.5 8.5-5-5L2 17" /></svg></span>
+              <div class="revelar revelar--right flex flex-col justify-between gap-6 rounded-[20px] border border-paper/20 bg-paper/5 p-6 shadow-soft">
+                <span class="text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 7h6v6" /> <path d="m22 7-8.5 8.5-5-5L2 17" /></svg></span>
                 <div>
-                  <h3 class="text-xl font-semibold leading-snug text-graphite-900">Fôlego pra crescer</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-graphite-600">Com as contas organizadas, você ganha base financeira pra investir e crescer na próxima safra.</p>
+                  <h3 class="text-xl font-semibold leading-snug text-paper">Fôlego pra crescer</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-paper/75">Com as contas organizadas, você ganha base financeira pra investir e crescer na próxima safra.</p>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="mt-10 border-t border-graphite-900/15 pt-10 lg:mt-12 lg:pt-12">
+          <div class="mt-10 border-t border-paper/20 pt-10 lg:mt-12 lg:pt-12">
             <div class="diferenciais-carousel revelar" data-carousel>
               <div class="mx-auto max-w-2xl text-center">
-                <p class="text-sm font-medium uppercase tracking-[0.14em] text-olive-700">Diferenciais</p>
-                <h3 class="mt-2 text-2xl font-semibold text-graphite-900 sm:text-3xl">O que sustenta cada estruturação</h3>
-                <p class="lead mt-3 text-graphite-600">Unimos conhecimento do agro, análise financeira e acesso a diferentes fontes de capital para construir operações de acordo com a realidade de cada cliente.</p>
+                <p class="text-sm font-medium uppercase tracking-[0.14em] text-gold-400">Diferenciais</p>
+                <h3 class="mt-2 text-2xl font-semibold text-paper sm:text-3xl">O que sustenta cada estruturação</h3>
+                <p class="lead mt-3 text-paper/75">Unimos conhecimento do agro, análise financeira e acesso a diferentes fontes de capital para construir operações de acordo com a realidade de cada cliente.</p>
               </div>
 
               <div class="diferenciais-carousel__track mt-8" data-carousel-track tabindex="0" role="region" aria-label="Diferenciais da BS Agro Capital, role para o lado ou use as setas abaixo">
                 <div class="diferenciais-carousel__card">
-                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22 16 8" /> <path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z" /> <path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /></svg></span>
-                  <h4 class="mt-5 text-xl font-semibold leading-snug text-graphite-900">Conhecimento do agro</h4>
-                  <p class="mt-3 text-sm leading-relaxed text-graphite-600">Compreensão da dinâmica produtiva, patrimonial e financeira do agronegócio brasileiro.</p>
+                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 22 16 8" /> <path d="M3.47 12.53 5 11l1.53 1.53a3.5 3.5 0 0 1 0 4.94L5 19l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M7.47 8.53 9 7l1.53 1.53a3.5 3.5 0 0 1 0 4.94L9 15l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M11.47 4.53 13 3l1.53 1.53a3.5 3.5 0 0 1 0 4.94L13 11l-1.53-1.53a3.5 3.5 0 0 1 0-4.94Z" /> <path d="M20 2h2v2a4 4 0 0 1-4 4h-2V6a4 4 0 0 1 4-4Z" /> <path d="M11.47 17.47 13 19l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L5 19l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M15.47 13.47 17 15l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L9 15l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /> <path d="M19.47 9.47 21 11l-1.53 1.53a3.5 3.5 0 0 1-4.94 0L13 11l1.53-1.53a3.5 3.5 0 0 1 4.94 0Z" /></svg></span>
+                  <h4 class="mt-5 text-xl font-semibold leading-snug text-paper">Conhecimento do agro</h4>
+                  <p class="mt-3 text-sm leading-relaxed text-paper/75">Compreensão da dinâmica produtiva, patrimonial e financeira do agronegócio brasileiro.</p>
                 </div>
                 <div class="diferenciais-carousel__card">
-                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <circle cx="11.5" cy="14.5" r="2.5" /> <path d="M13.3 16.3 15 18" /></svg></span>
-                  <h4 class="mt-5 text-xl font-semibold leading-snug text-graphite-900">Análise financeira</h4>
-                  <p class="mt-3 text-sm leading-relaxed text-graphite-600">Avaliação técnica da situação financeira e patrimonial de cada cliente antes de estruturar qualquer operação.</p>
+                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" /> <path d="M14 2v5a1 1 0 0 0 1 1h5" /> <circle cx="11.5" cy="14.5" r="2.5" /> <path d="M13.3 16.3 15 18" /></svg></span>
+                  <h4 class="mt-5 text-xl font-semibold leading-snug text-paper">Análise financeira</h4>
+                  <p class="mt-3 text-sm leading-relaxed text-paper/75">Avaliação técnica da situação financeira e patrimonial de cada cliente antes de estruturar qualquer operação.</p>
                 </div>
                 <div class="diferenciais-carousel__card">
-                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3" /> <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /> <path d="m21 3 1 11h-2" /> <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /> <path d="M3 4h8" /></svg></span>
-                  <h4 class="mt-5 text-xl font-semibold leading-snug text-graphite-900">Rede de relacionamento</h4>
-                  <p class="mt-3 text-sm leading-relaxed text-graphite-600">Relacionamento estratégico com cooperativas de crédito, fundos de investimento e diferentes agentes do mercado financeiro e do agronegócio.</p>
+                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m11 17 2 2a1 1 0 1 0 3-3" /> <path d="m14 14 2.5 2.5a1 1 0 1 0 3-3l-3.88-3.88a3 3 0 0 0-4.24 0l-.88.88a1 1 0 1 1-3-3l2.81-2.81a5.79 5.79 0 0 1 7.06-.87l.47.28a2 2 0 0 0 1.42.25L21 4" /> <path d="m21 3 1 11h-2" /> <path d="M3 3 2 14l6.5 6.5a1 1 0 1 0 3-3" /> <path d="M3 4h8" /></svg></span>
+                  <h4 class="mt-5 text-xl font-semibold leading-snug text-paper">Rede de relacionamento</h4>
+                  <p class="mt-3 text-sm leading-relaxed text-paper/75">Relacionamento estratégico com cooperativas de crédito, fundos de investimento e diferentes agentes do mercado financeiro e do agronegócio.</p>
                 </div>
                 <div class="diferenciais-carousel__card">
-                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></svg></span>
-                  <h4 class="mt-5 text-xl font-semibold leading-snug text-graphite-900">Estruturação sob medida</h4>
-                  <p class="mt-3 text-sm leading-relaxed text-graphite-600">Cada operação é desenhada de acordo com o patrimônio, a garantia disponível e a realidade financeira do cliente.</p>
+                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.83 2.18a2 2 0 0 0-1.66 0L2.6 6.08a1 1 0 0 0 0 1.83l8.58 3.91a2 2 0 0 0 1.66 0l8.58-3.9a1 1 0 0 0 0-1.83z" /> <path d="M2 12a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 12" /> <path d="M2 17a1 1 0 0 0 .58.91l8.6 3.91a2 2 0 0 0 1.65 0l8.58-3.9A1 1 0 0 0 22 17" /></svg></span>
+                  <h4 class="mt-5 text-xl font-semibold leading-snug text-paper">Estruturação sob medida</h4>
+                  <p class="mt-3 text-sm leading-relaxed text-paper/75">Cada operação é desenhada de acordo com o patrimônio, a garantia disponível e a realidade financeira do cliente.</p>
                 </div>
                 <div class="diferenciais-carousel__card">
-                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /></svg></span>
-                  <h4 class="mt-5 text-xl font-semibold leading-snug text-graphite-900">Acompanhamento em cada etapa</h4>
-                  <p class="mt-3 text-sm leading-relaxed text-graphite-600">Suporte técnico do diagnóstico à execução, com transparência sobre o andamento do processo.</p>
+                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="8" height="4" x="8" y="2" rx="1" ry="1" /> <path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" /> <path d="m9 14 2 2 4-4" /></svg></span>
+                  <h4 class="mt-5 text-xl font-semibold leading-snug text-paper">Acompanhamento em cada etapa</h4>
+                  <p class="mt-3 text-sm leading-relaxed text-paper/75">Suporte técnico do diagnóstico à execução, com transparência sobre o andamento do processo.</p>
                 </div>
                 <div class="diferenciais-carousel__card">
-                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-700"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></svg></span>
-                  <h4 class="mt-5 text-xl font-semibold leading-snug text-graphite-900">Relacionamento direto e discrição</h4>
-                  <p class="mt-3 text-sm leading-relaxed text-graphite-600">Atendimento próximo e sigiloso, essencial diante de decisões financeiras sensíveis.</p>
+                  <span class="flex h-12 w-12 items-center justify-center rounded-xl bg-gold-500/10 text-gold-400"><svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z" /> <path d="m9 12 2 2 4-4" /></svg></span>
+                  <h4 class="mt-5 text-xl font-semibold leading-snug text-paper">Relacionamento direto e discrição</h4>
+                  <p class="mt-3 text-sm leading-relaxed text-paper/75">Atendimento próximo e sigiloso, essencial diante de decisões financeiras sensíveis.</p>
                 </div>
               </div>
 
@@ -838,7 +1049,7 @@
               <ul class="flex flex-col gap-3">
                 <li><a href="mailto:contato@bsagrocapital.com" class="footer-link flex items-center gap-2.5 text-base"><svg class="h-5 w-5 flex-none text-gold-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect width="20" height="16" x="2" y="4" rx="2" /> <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>contato@bsagrocapital.com</a></li>
                 <li><a href="tel:+5562996892488" class="footer-link flex items-center gap-2.5 text-base"><svg class="h-5 w-5 flex-none text-gold-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>(62) 99689-2488</a></li>
-                <li class="flex items-center gap-2.5 text-base text-paper/70"><svg class="h-5 w-5 flex-none text-gold-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></svg>Av. 136, 960 - St. Marista, Goiânia - GO, 74180-140</li>
+                <li class="flex items-start gap-2.5 text-base text-paper/70"><svg class="mt-0.5 h-5 w-5 flex-none text-gold-400" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0" /> <circle cx="12" cy="10" r="3" /></svg>Av. Comercial, Qd. 27, Lt. 03, Parque Brasília<br />2ª Etapa, Anápolis – GO, CEP 75093-715</li>
               </ul>
             </div>
           </div>

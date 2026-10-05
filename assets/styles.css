@@ -1010,6 +1010,20 @@ h6 {
   z-index: 1;
 }
 
+/* Nome e cargo do Caio encostados no pé do cartão em destaque, à esquerda do
+   recorte dele. O right é maior que a largura que o retrato alcança na mesma
+   faixa de tela (altura do clamp × ~0,81, mais o right de 1.25rem dele), pra
+   legenda e figura nunca se tocarem. z-index 2 só pra passar à frente do véu
+   e da foto de fundo — o retrato, que é irmão do cartão, continua bem acima
+   (z-index 51). Só de lg pra cima (classe no HTML): abaixo disso o cartão
+   estreita, o retrato encolhe e a legenda cairia por cima do texto. */
+.solucoes-featured__assinatura {
+  position: absolute;
+  z-index: 2;
+  right: 22.5rem;
+  bottom: 2rem;
+}
+
 /* Retrato que escapa do cartão por cima, encostado no canto inferior direito.
    Sibling do .solucoes-featured (não filho) de propósito: o cartão tem
    overflow: hidden para as bordas arredondadas, e um filho não conseguiria
@@ -1035,6 +1049,30 @@ h6 {
   .solucoes-featured__portrait {
     display: none;
   }
+}
+
+/* Variante do retrato no cartão de #solucoes depois da troca da foto: o
+   recorte do Caio é de meio corpo (termina na altura da coxa), então, na
+   altura antiga — pensada pra foto de corpo inteiro das duas sócias — ele
+   mal passava da borda de cima do cartão. Um pouco mais alto resolve, e a
+   largura resultante (~0,8 da altura) continua caindo à direita do texto,
+   que está preso em max-w-3xl. */
+.solucoes-featured__portrait--caio {
+  height: clamp(19rem, 35vw, 29rem);
+}
+
+/* Variante do retrato no cartão de "Quem somos" (#sobre). Mais alto ainda que
+   o de #solucoes: o cartão de #sobre não tem CTA (é só texto), então é mais
+   baixo, e com a altura de lá o retrato não sobraria nada pra fora. Aqui ele
+   precisa ESTOURAR a borda de cima — foi o pedido. Continua escondido abaixo
+   de 640px pela regra de .solucoes-featured__portrait acima. */
+.solucoes-featured__portrait--sobre {
+  height: clamp(22rem, 44vw, 36rem);
+  /* Encostado mais à direita que o de #solucoes (lá o right é positivo, de até
+     1.25rem): aqui o retrato passa 12px da borda do cartão. Fica dentro do
+     respiro lateral da seção (px-6, 24px no mínimo), então não cria rolagem
+     horizontal em nenhuma largura. */
+  right: -0.75rem;
 }
 
 /* --------------------------------------------------------------------------
@@ -1078,6 +1116,17 @@ h6 {
   background-color: var(--color-paper);
   background-image: radial-gradient(560px circle at 15% 35%, rgb(212 175 55 / 0.10), transparent 60%),
     radial-gradient(620px circle at 85% 65%, rgb(26 98 71 / 0.10), transparent 60%);
+}
+
+/* Fatia verde-escura no meio da página (#como-funciona). Base olive-800,
+   entre o olive-900 do hero/CTA e as seções claras: o miolo ganha um bloco
+   de respiro em vez de cinco seções claras seguidas. Os dois círculos
+   seguem a mesma regra do .bg-mesh-light (35%/65%, longe das bordas, para
+   não criar uma linha de contraste na emenda com a seção vizinha). */
+.bg-mesh-olive {
+  background-color: var(--color-olive-800);
+  background-image: radial-gradient(560px circle at 15% 35%, rgb(212 175 55 / 0.14), transparent 60%),
+    radial-gradient(620px circle at 85% 65%, rgb(142 202 176 / 0.12), transparent 60%);
 }
 
 .bg-mesh-dark {
@@ -1148,6 +1197,143 @@ h6 {
 
   .glass-card--hero {
     background-color: rgb(255 255 255 / 0.97);
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9c. Cartões do time — faixa de nome e cargo em vidro
+   Mesmo vidro da pílula do cabeçalho (.header-pill, seção 4): mesmo blur de
+   26px, mesma saturação de 190%, mesmo realce especular na diagonal no
+   ::before e o mesmo filete de luz interno no topo.
+
+   O que muda é a opacidade do branco, e pela mesma razão que levou o
+   .glass-card--hero a 85%: a pílula do cabeçalho (0.5 → 0.22 → 0.32) flutua
+   sobre uma foto só, escolhida e enquadrada pra isso; esta faixa cai sobre vários
+   retratos diferentes, e o trecho que fica atrás dela — o tronco da
+   pessoa — pode ser uma camisa branca num cartão e um fundo quase preto no
+   outro. Com a base em 0.80 no ponto mais translúcido, o pior caso (faixa
+   sobre preto puro) deixa o nome em graphite-900 a ~13:1 e o cargo em
+   graphite-700 a ~7:1 — folga confortável sobre o mínimo AA de 4,5:1.
+
+   A faixa não tem border-radius próprio: quem arredonda os cantos de baixo é
+   o overflow-hidden do <figure>, então ela acompanha o recorte do cartão sem
+   precisar repetir o valor. -------------------------------------------------- */
+.time-legenda {
+  position: relative;
+  isolation: isolate;
+  border-top: 1px solid rgb(255 255 255 / 0.4);
+  background: linear-gradient(
+    165deg,
+    rgb(255 255 255 / 0.88) 0%,
+    rgb(255 255 255 / 0.80) 45%,
+    rgb(255 255 255 / 0.85) 100%
+  );
+  backdrop-filter: blur(26px) saturate(190%);
+  -webkit-backdrop-filter: blur(26px) saturate(190%);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.85),
+    inset 0 -1px 1px rgb(255 255 255 / 0.2);
+}
+
+.time-legenda::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    115deg,
+    rgb(255 255 255 / 0.55) 0%,
+    rgb(255 255 255 / 0) 30%,
+    rgb(255 255 255 / 0) 70%,
+    rgb(255 255 255 / 0.3) 100%
+  );
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+
+/* Sem backdrop-filter o vidro não existe: a faixa vira um fundo quase opaco,
+   como as outras superfícies de vidro do site. */
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .time-legenda {
+    background: rgb(255 255 255 / 0.95);
+  }
+
+  .time-legenda::before {
+    content: none;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   9g. Time — faixa de retratos em loop contínuo
+   Mesmo mecanismo do carrossel de parceiros (9b, logo abaixo): a trilha
+   duplica a lista de pessoas uma vez e anima até -50%, então o quadro em que
+   o loop reinicia é idêntico ao anterior e não existe "salto". A duplicata
+   fica com aria-hidden no HTML, para o leitor de tela ler os oito nomes uma
+   vez só.
+
+   Não é o carrossel de Diferenciais (scroll-snap + setas + JS) porque aqui o
+   pedido é que passe sozinho: um marquee em CSS puro anda sem nenhum
+   JavaScript, e a regra global de prefers-reduced-motion (seção 11) já zera a
+   duração de toda animação do site, então ele para sozinho para quem pede
+   menos movimento — sem precisar de regra própria.
+
+   O respiro entre os cartões é margin-right em cada item, e não gap na
+   trilha: o gap não se aplica na emenda entre as duas metades, e ali o vão
+   sumiria uma vez a cada volta. -------------------------------------------- */
+.time-marquee {
+  overflow: hidden;
+}
+
+.time-marquee__track {
+  display: flex;
+  width: max-content;
+  /* 52s, e não os 60s de quando a faixa tinha oito cartões: com sete, a
+     mesma duração aceleraria a passagem. O ajuste mantém a velocidade em
+     pixels por segundo praticamente igual. */
+  animation: time-marquee-scroll 52s linear infinite;
+}
+
+/* Pausa no hover do mouse e no foco por teclado. Diferente do carrossel de
+   parceiros, que só pausa no foco: ali os itens são logos, aqui são pessoas
+   com nome e cargo pra ler, e sem parar o cartão que o visitante quer olhar
+   escorrega pra fora do cursor. O foco continua valendo sozinho, para quem
+   navega por teclado (WCAG 2.2.2). */
+.time-marquee:hover .time-marquee__track,
+.time-marquee:focus-within .time-marquee__track {
+  animation-play-state: paused;
+}
+
+@keyframes time-marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.time-marquee__item {
+  position: relative;
+  flex: none;
+  width: 208px;
+  margin-right: 1rem;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: 20px;
+  border: 1px solid rgb(23 27 36 / 0.1);
+  background-color: var(--color-olive-100);
+}
+
+@media (min-width: 640px) {
+  .time-marquee__item {
+    width: 248px;
+    margin-right: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .time-marquee__item {
+    width: 288px;
   }
 }
 
@@ -1295,9 +1481,24 @@ h6 {
   display: flex;
   flex-direction: column;
   border-radius: 20px;
-  border: 1px solid color-mix(in srgb, var(--color-graphite-900) 15%, transparent);
-  background-color: var(--color-paper);
+  border: 1px solid color-mix(in srgb, var(--color-paper) 20%, transparent);
+  background-color: color-mix(in srgb, var(--color-paper) 6%, transparent);
   padding: 1.5rem;
+  transition: transform 300ms ease;
+}
+
+/* Mesmo salto dos cartões de "Como funciona" (transition-transform
+   duration-300 hover:-translate-y-1): só o transform, 4px, 300ms — sem
+   mudar borda nem fundo. Preso em @media (hover: hover) porque no celular
+   o carrossel é arrastado com o dedo: sem essa trava, o toque do swipe
+   deixa o cartão travado no estado levantado até o próximo toque em outro
+   lugar. `transform` não ocupa espaço no layout, então o salto não mexe no
+   scroll-snap da pista. A regra global de prefers-reduced-motion (seção
+   11) zera a duração da transição; o estado final continua igual. */
+@media (hover: hover) {
+  .diferenciais-carousel__card:hover {
+    transform: translateY(-4px);
+  }
 }
 
 @media (min-width: 640px) {
@@ -1327,7 +1528,7 @@ h6 {
   flex: 1 1 auto;
   min-width: 0;
   border-radius: 999px;
-  background-color: color-mix(in srgb, var(--color-graphite-900) 12%, transparent);
+  background-color: color-mix(in srgb, var(--color-paper) 20%, transparent);
 }
 
 .diferenciais-carousel__progress-fill {
@@ -1335,7 +1536,10 @@ h6 {
   inset-block: 0;
   left: 0;
   border-radius: 999px;
-  background-color: var(--color-gold-600);
+  /* gold-400, não o gold-600 original: sobre a trilha clara da fatia
+     escura o dourado escuro sumia (2,4:1). É o mesmo dourado dos ícones
+     das duas fatias escuras. */
+  background-color: var(--color-gold-400);
   transition: width 0.2s ease;
 }
 
@@ -1372,7 +1576,7 @@ h6 {
   border-radius: 999px;
   background: none;
   padding: 0;
-  color: var(--color-graphite-900);
+  color: var(--color-paper);
   cursor: pointer;
   transition: color 0.2s ease, opacity 0.25s ease, visibility 0.25s ease;
 }
@@ -1394,7 +1598,7 @@ h6 {
 
 .diferenciais-carousel__nav:hover,
 .diferenciais-carousel__nav:focus-visible {
-  color: var(--color-gold-700);
+  color: var(--color-gold-400);
 }
 
 /* --------------------------------------------------------------------------

@@ -237,8 +237,9 @@ central de dados, então usar busca e substituição em todo o diretório em vez
 de editar arquivo por arquivo:
 
 1. **Dados de contato**: endereço, CNPJ e WhatsApp já estão preenchidos com
-   os dados reais (Av. 136, 960 - St. Marista, Goiânia - GO, 74180-140;
-   CNPJ 66.308.795/0001-08; WhatsApp (62) 99923-2488). Faltam duas coisas:
+   os dados reais (Av. Comercial, Qd. 27, Lt. 03, Parque Brasília – 2ª
+   Etapa, Anápolis – GO, CEP 75093-715; CNPJ 66.308.795/0001-08; WhatsApp
+   (62) 99923-2488). Faltam duas coisas:
    - **E-mail institucional**, ainda como `[INSERIR E-MAIL]`. Aparece no
      rodapé, na seção de contato e na Política de Privacidade, e precisa ser
      acrescentado também ao schema.org no `<head>` das duas páginas.
@@ -291,6 +292,33 @@ de editar arquivo por arquivo:
     cada uma.
 14. **Vídeo institucional**: hoje o site não embute vídeo. Se houver um
     vídeo real, adicionar um embed de YouTube/Vimeo na seção correspondente.
+15. **Fotos do time** (bloco "Nosso time", `#time`, dentro da seção
+    `#sobre`): os oito nomes e cargos são os reais, informados pela BS
+    Agro Capital, e **as oito fotos já estão no site**
+    (`assets/img/time/`, WebP de 800px de largura, convertidos dos
+    arquivos enviados). Ninguém ficou com as iniciais no lugar do rosto.
+
+    Para trocar um retrato, substituir o `<img>` **nas duas metades da
+    faixa** (a segunda é a duplicata que faz o loop, e as duas precisam
+    continuar idênticas). O modelo de tag, com `alt`, dimensões e
+    classes, está no comentário logo acima da faixa em `index.html`. O
+    `width`/`height` precisa bater com o arquivo, senão o navegador
+    reserva o espaço errado e a página salta no carregamento.
+
+    Os arquivos chegaram em formatos diferentes e nenhum bate exatamente
+    com o recorte 4/5 dos cartões: Évellyn, Paulo Henrique e Priscila são
+    quadrados (800x800) e perdem um pouco das laterais; Alcaã, Igor,
+    Klinger e Lucas são 3:4 (800x1071) e perdem um pouco de cima e de
+    baixo. Em todos o rosto continua centralizado, mas vale conferir isso
+    a cada retrato novo.
+
+    **O arquivo do Caio precisa ser trocado antes de publicar.** O que
+    está no site veio de uma captura de tela, então tem só 478x598 — o
+    cartão é exibido a ~290px de largura, ou seja, a imagem cobre 1x mas
+    fica visivelmente mole em tela de alta densidade, onde as outras, de
+    800px, continuam nítidas. Pedir o arquivo original ao cliente e
+    reconverter no mesmo recorte 4/5, com pelo menos 640px de largura.
+    Lembrar de atualizar o `width`/`height` da tag junto.
 
 > Os itens 10 a 13 envolvem identidade de pessoas reais, depoimentos de
 > clientes e relações comerciais. Foram deliberadamente mantidos como
