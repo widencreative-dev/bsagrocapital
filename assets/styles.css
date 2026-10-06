@@ -1287,10 +1287,10 @@ h6 {
 .time-marquee__track {
   display: flex;
   width: max-content;
-  /* 52s, e não os 60s de quando a faixa tinha oito cartões: com sete, a
+  /* 45s, e não os 52s de quando a faixa tinha sete cartões: com seis, a
      mesma duração aceleraria a passagem. O ajuste mantém a velocidade em
      pixels por segundo praticamente igual. */
-  animation: time-marquee-scroll 52s linear infinite;
+  animation: time-marquee-scroll 45s linear infinite;
 }
 
 /* Pausa no hover do mouse e no foco por teclado. Diferente do carrossel de

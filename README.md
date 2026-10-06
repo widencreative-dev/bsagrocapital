@@ -293,8 +293,8 @@ de editar arquivo por arquivo:
 14. **Vídeo institucional**: hoje o site não embute vídeo. Se houver um
     vídeo real, adicionar um embed de YouTube/Vimeo na seção correspondente.
 15. **Fotos do time** (bloco "Nosso time", `#time`, dentro da seção
-    `#sobre`): os oito nomes e cargos são os reais, informados pela BS
-    Agro Capital, e **as oito fotos já estão no site**
+    `#sobre`): os sete nomes e cargos são os reais, informados pela BS
+    Agro Capital, e **as sete fotos já estão no site**
     (`assets/img/time/`, WebP de 800px de largura, convertidos dos
     arquivos enviados). Ninguém ficou com as iniciais no lugar do rosto.
 
@@ -307,8 +307,8 @@ de editar arquivo por arquivo:
 
     Os arquivos chegaram em formatos diferentes e nenhum bate exatamente
     com o recorte 4/5 dos cartões: Évellyn, Paulo Henrique e Priscila são
-    quadrados (800x800) e perdem um pouco das laterais; Alcaã, Igor,
-    Klinger e Lucas são 3:4 (800x1071) e perdem um pouco de cima e de
+    quadrados (800x800) e perdem um pouco das laterais; Alcaã, Igor e
+    Klinger são 3:4 (800x1071) e perdem um pouco de cima e de
     baixo. Em todos o rosto continua centralizado, mas vale conferir isso
     a cada retrato novo.
 
