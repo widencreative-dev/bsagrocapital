@@ -972,6 +972,33 @@ h6 {
   z-index: 2;
 }
 
+/* CTA dos cartões de "Atuação especializada": largura do cartão e quebra de
+   linha quando precisa.
+   Os três cartões são estreitos — em lg:grid-cols-3 sobram ~341px de área
+   útil por cartão a 1280px de viewport, e ~245px a 1024px. Os rótulos aqui
+   são frases longas: medido na Raleway 600/16px (a fonte e o corpo do
+   .cta-btn), "Quero um plano para Recuperação Judicial" dá 328px de texto,
+   392px com o padding da pílula. Como .cta-btn é white-space: nowrap e
+   width: fit-content, o botão ficaria maior que o cartão e seria cortado
+   pelo overflow: hidden dele.
+   Escopado em .atuacao-card de propósito: nos outros botões do site o
+   nowrap continua valendo, porque lá eles vivem em caixas largas e a pílula
+   justa é a forma certa. O line-height sobe de 1 para 1.25 porque o valor
+   base foi pensado para uma linha só. O padding na camada de hover impede
+   que o texto duplicado encoste na borda da pílula depois da quebra.
+   Botão ocupando a largura do cartão é também o formato do mockup enviado
+   pelo cliente. */
+.atuacao-card .cta-btn {
+  width: 100%;
+  white-space: normal;
+  text-align: center;
+  line-height: 1.25;
+}
+
+.atuacao-card .cta-btn__hover {
+  padding-inline: 1.5rem;
+}
+
 /* Cartão grande em destaque ("Solução mais procurada"): foto de fundo com um
    véu verde-oliva por cima (mesmo tom do bg-olive-900 que existia antes, só
    que agora sobre a imagem) pra manter o texto legível em qualquer ponto da
@@ -1020,8 +1047,26 @@ h6 {
 .solucoes-featured__assinatura {
   position: absolute;
   z-index: 2;
-  right: 22.5rem;
   bottom: 2rem;
+  /* O "right" acompanha o retrato em vez de ser um valor fixo (eram 22.5rem).
+     Com valor fixo a distância até o corpo dela mudava muito conforme a tela:
+     o retrato encolhe por clamp(19rem, 35vw, 29rem), então a 1024px a
+     assinatura ficava quase 100px longe dela e acima de 1333px, ~72px.
+     A conta reproduz a posição da silhueta:
+       clamp(...1.5vw...)  = o "right" do próprio retrato
+       altura x 0,578      = onde começa o corpo dela, contado da direita.
+                             0,578 = 0,661 (proporção 640x968 do arquivo)
+                             x 0,874, porque na altura da assinatura a
+                             silhueta começa 12,6% para dentro da borda
+                             esquerda da imagem — medido no canal alpha do
+                             WebP, é a faixa do quadril, mais estreita que os
+                             ombros.
+       + 1.5rem            = o respiro que sobra entre o texto e ela.
+     AO TROCAR O RECORTE: refazer as duas constantes, senão a assinatura
+     descola do corpo ou encosta nele. */
+  right: calc(
+    clamp(0rem, 1.5vw, 1.25rem) + clamp(19rem, 35vw, 29rem) * 0.578 + 1.5rem
+  );
 }
 
 /* Retrato que escapa do cartão por cima, encostado no canto inferior direito.
@@ -1052,12 +1097,18 @@ h6 {
 }
 
 /* Variante do retrato no cartão de #solucoes depois da troca da foto: o
-   recorte do Caio é de meio corpo (termina na altura da coxa), então, na
-   altura antiga — pensada pra foto de corpo inteiro das duas sócias — ele
-   mal passava da borda de cima do cartão. Um pouco mais alto resolve, e a
-   largura resultante (~0,8 da altura) continua caindo à direita do texto,
-   que está preso em max-w-3xl. */
-.solucoes-featured__portrait--caio {
+   recorte da Évellyn é de meio corpo (termina logo abaixo do cinto), então,
+   na altura antiga — pensada pra foto de corpo inteiro das duas sócias — ele
+   mal passava da borda de cima do cartão. Um pouco mais alto resolve.
+   A altura é a mesma que o recorte do Caio usava antes dele, de propósito:
+   o arquivo da Évellyn foi recortado no mesmo enquadramento (chapéu até a
+   cintura, 0,66 de proporção contra os 0,70 dele), então o retrato escapa
+   da borda de cima na mesma medida de antes e a largura resultante
+   (~19rem) continua caindo à direita do texto, que está preso em max-w-3xl,
+   e à direita da .solucoes-featured__assinatura, que fica em right: 22.5rem.
+   AO TROCAR por um recorte de proporção diferente, conferir os dois: um
+   recorte mais largo que ~21rem encosta na assinatura. */
+.solucoes-featured__portrait--evellyn {
   height: clamp(19rem, 35vw, 29rem);
 }
 
@@ -1287,10 +1338,12 @@ h6 {
 .time-marquee__track {
   display: flex;
   width: max-content;
-  /* 45s, e não os 52s de quando a faixa tinha sete cartões: com seis, a
-     mesma duração aceleraria a passagem. O ajuste mantém a velocidade em
-     pixels por segundo praticamente igual. */
-  animation: time-marquee-scroll 45s linear infinite;
+  /* A duração acompanha o número de cartões para manter a velocidade em
+     pixels por segundo praticamente igual: eram 52s com sete cartões, 45s
+     quando a faixa caiu para seis, e voltou a 52s com a entrada da Bruna
+     Arantes (sete de novo). AO ADICIONAR OU REMOVER alguém da faixa,
+     recalcular na mesma proporção (~7,5s por cartão). */
+  animation: time-marquee-scroll 52s linear infinite;
 }
 
 /* Pausa no hover do mouse e no foco por teclado. Diferente do carrossel de

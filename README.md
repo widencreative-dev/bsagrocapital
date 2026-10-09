@@ -247,54 +247,52 @@ de editar arquivo por arquivo:
      sendo usado também como telefone (gera um link `tel:`). Se a linha for
      exclusiva de WhatsApp, remover esse campo do rodapé e da seção de
      contato para não oferecer um canal que não existe.
-2. **Redes sociais**: links de LinkedIn/Instagram no rodapé, ainda como
-   `[INSERIR LINK DO LINKEDIN]` / `[INSERIR LINK DO INSTAGRAM]`.
-3. **Domínio definitivo**: usado no `<link rel="canonical">`, no Open Graph
+2. **Domínio definitivo**: usado no `<link rel="canonical">`, no Open Graph
    e no `robots.txt`/`sitemap.xml`. Atualizar para o domínio real antes do
    deploy.
-4. **Indicadores institucionais** (seção "Ano de fundação" etc.): ano de
+3. **Indicadores institucionais** (seção "Ano de fundação" etc.): ano de
    fundação, número de operações, volume de crédito, marcados como
    `[INSERIR DADO]`.
-5. **Formulário de contato**: a `action` aponta para um endpoint placeholder
+4. **Formulário de contato**: a `action` aponta para um endpoint placeholder
    do Formspree (`[INSERIR_ID_FORMSPREE]`). Configurar um endpoint real
    antes de publicar — sem isso, o JS detecta o placeholder e mostra um
    aviso em vez de tentar enviar.
-6. **Política de Privacidade** (`privacidade.html`): texto genérico sobre
+5. **Política de Privacidade** (`privacidade.html`): texto genérico sobre
    LGPD, sinalizado como placeholder. **Precisa de revisão jurídica** antes
    da publicação.
-7. **Seção de Recuperação Judicial**: propositalmente não cita leis, artigos
+6. **Seção de Recuperação Judicial**: propositalmente não cita leis, artigos
    ou jurisprudência. Revisar com jurídico antes de publicar, caso seja
    necessário incluir referências legais.
-8. **Imagens**: o Hero já usa uma fotografia real (`assets/img/hero/`) e a
+7. **Imagens**: o Hero já usa uma fotografia real (`assets/img/hero/`) e a
    logo real está integrada no header/rodapé/favicon (`assets/img/logo/`).
    As demais ilustrações (Sobre, Soluções, galeria) ainda são placeholders
    em `assets/img/placeholders/`; substituir por fotografias reais mantendo
    os textos alternativos (`alt`) atualizados.
-9. **Imagem Open Graph** (`og-image.svg`): ainda é um placeholder simples;
+8. **Imagem Open Graph** (`og-image.svg`): ainda é um placeholder simples;
    substituir por uma imagem de compartilhamento definitiva (1200x630),
    idealmente usando a logo real.
-10. **Especialista responsável** (seção "Especialista responsável"): nome,
-    cargo e trajetória de Évellyn Brandão já estão preenchidos com dados
-    reais fornecidos pela BS Agro Capital. Falta apenas inserir a **foto
-    real** (hoje é um ícone placeholder), mediante validação final antes da
-    publicação.
-11. **Depoimentos** (seção "Depoimentos"): os três depoimentos são
+9. **Especialista responsável** (seção "Especialista responsável"): nome,
+   cargo e trajetória de Évellyn Brandão já estão preenchidos com dados
+   reais fornecidos pela BS Agro Capital. Falta apenas inserir a **foto
+   real** (hoje é um ícone placeholder), mediante validação final antes da
+   publicação.
+10. **Depoimentos** (seção "Depoimentos"): os três depoimentos são
     placeholders estruturais. **Não publicar depoimentos fictícios** —
     substituir por depoimentos reais, com autorização expressa de cada
     cliente citado.
-12. **Cases de operações** (seção "Cases"): os cases são um template
+11. **Cases de operações** (seção "Cases"): os cases são um template
     (situação/solução/resultado). Substituir por casos reais e
     anonimizados, respeitando a confidencialidade dos clientes e, se
     necessário, validação jurídica sobre o que pode ser divulgado.
-13. **Parceiros e instituições financeiras** (seção "Rede de capital"): os
+12. **Parceiros e instituições financeiras** (seção "Rede de capital"): os
     slots de logo são placeholders genéricos. Inserir apenas logotipos e
     nomes de instituições com parceria vigente e autorização expressa de
     cada uma.
-14. **Vídeo institucional**: hoje o site não embute vídeo. Se houver um
+13. **Vídeo institucional**: hoje o site não embute vídeo. Se houver um
     vídeo real, adicionar um embed de YouTube/Vimeo na seção correspondente.
-15. **Fotos do time** (bloco "Nosso time", `#time`, dentro da seção
-    `#sobre`): os sete nomes e cargos são os reais, informados pela BS
-    Agro Capital, e **as sete fotos já estão no site**
+14. **Fotos do time** (bloco "Nosso time", `#time`, dentro da seção
+    `#sobre`): os oito nomes e cargos são os reais, informados pela BS
+    Agro Capital, e **as oito fotos já estão no site**
     (`assets/img/time/`, WebP de 800px de largura, convertidos dos
     arquivos enviados). Ninguém ficou com as iniciais no lugar do rosto.
 
@@ -306,10 +304,10 @@ de editar arquivo por arquivo:
     reserva o espaço errado e a página salta no carregamento.
 
     Os arquivos chegaram em formatos diferentes e nenhum bate exatamente
-    com o recorte 4/5 dos cartões: Évellyn, Paulo Henrique e Priscila são
-    quadrados (800x800) e perdem um pouco das laterais; Alcaã, Igor e
-    Klinger são 3:4 (800x1071) e perdem um pouco de cima e de
-    baixo. Em todos o rosto continua centralizado, mas vale conferir isso
+    com o recorte 4/5 dos cartões: Bruna, Évellyn, Paulo Henrique e
+    Priscila são quadrados (800x800) e perdem um pouco das laterais;
+    Alcaã, Igor e Klinger são 3:4 (800x1071) e perdem um pouco de cima e
+    de baixo. Em todos o rosto continua centralizado, mas vale conferir isso
     a cada retrato novo.
 
     **O arquivo do Caio precisa ser trocado antes de publicar.** O que
