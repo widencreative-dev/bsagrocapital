@@ -1090,7 +1090,14 @@ h6 {
   pointer-events: none;
 }
 
-@media (max-width: 640px) {
+/* Abaixo de lg (1024px) o retrato some. O cartão estreita junto com a tela,
+   mas a figura acompanha a viewport por clamp e, a partir de ~1023px, ela
+   avançava por cima do título e do corpo do texto (quem ficava escondido era
+   o texto: o retrato tem z-index 51). É o mesmo corte que a
+   .solucoes-featured__assinatura já faz pelo `hidden lg:block` no HTML, e
+   pela mesma razão. De lg pra cima os dois convivem porque o
+   .solucoes-featured__content reserva a faixa da direita — ver logo abaixo. */
+@media (max-width: 1023px) {
   .solucoes-featured__portrait {
     display: none;
   }
@@ -1112,11 +1119,41 @@ h6 {
   height: clamp(19rem, 35vw, 29rem);
 }
 
+/* Faixa reservada à direita do texto, do tamanho do retrato que escapa por
+   cima do cartão. Sem ela o conteúdo vai até o max-w-3xl que o HTML define e
+   passa POR BAIXO da figura. A conta é a mesma nos dois cartões:
+
+     "right" do próprio retrato + largura que ele alcança + respiro
+
+   onde a largura = altura (o clamp de cada variante) × a proporção do arquivo
+   (largura ÷ altura em px). Reserva a caixa inteira da imagem, não a silhueta
+   — é o que garante que o texto não encoste nela em largura nenhuma.
+   Só de lg pra cima: abaixo disso o retrato está escondido e o texto usa o
+   cartão inteiro.
+   AO TROCAR UM RECORTE: refazer a proporção, senão a faixa sobra ou falta. */
+@media (min-width: 1024px) {
+  /* 0,661 = 640 ÷ 968 de evellyn-brandao-ceo-fundadora-recorte.webp */
+  .solucoes-featured__content--evellyn {
+    padding-right: calc(
+      clamp(0rem, 1.5vw, 1.25rem) + clamp(19rem, 35vw, 29rem) * 0.661 + 2rem
+    );
+  }
+
+  /* 0,828 = 1080 ÷ 1304 de produtoras-rurais-equipe-bs-agro-capital.webp.
+     Aqui o "right" do retrato é negativo (-0.75rem), então entra subtraindo:
+     ele passa um pouco da borda do cartão e devolve esse tanto ao texto. */
+  .solucoes-featured__content--sobre {
+    padding-right: calc(
+      clamp(22rem, 44vw, 36rem) * 0.828 - 0.75rem + 2rem
+    );
+  }
+}
+
 /* Variante do retrato no cartão de "Quem somos" (#sobre). Mais alto ainda que
    o de #solucoes: o cartão de #sobre não tem CTA (é só texto), então é mais
    baixo, e com a altura de lá o retrato não sobraria nada pra fora. Aqui ele
    precisa ESTOURAR a borda de cima — foi o pedido. Continua escondido abaixo
-   de 640px pela regra de .solucoes-featured__portrait acima. */
+   de 1024px pela regra de .solucoes-featured__portrait acima. */
 .solucoes-featured__portrait--sobre {
   height: clamp(22rem, 44vw, 36rem);
   /* Encostado mais à direita que o de #solucoes (lá o right é positivo, de até
